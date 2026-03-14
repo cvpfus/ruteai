@@ -1,0 +1,120 @@
+## Docs
+
+- [Account Setup](https://docs.mayar.id/accountsetup.md): Create your MAYAR account and start receiving payments in minutes.
+- [Add Customer Credit](https://docs.mayar.id/api-reference/creditbasedproduct/addcustomercredit.md): This endpoint is used to add credit to a member’s account on particular membership tier on membership credit product.
+- [Get Customer Balance](https://docs.mayar.id/api-reference/creditbasedproduct/customerbalance.md): This is endpoint is used to get a customer credit balance.
+- [Generate Immutable Checkout Link](https://docs.mayar.id/api-reference/creditbasedproduct/generateimmutablecheckoutlink.md): This endpoint is used to generate immutable checkout link for membership credit product.
+- [Get Paginate Customer Credit History](https://docs.mayar.id/api-reference/creditbasedproduct/paginatecustomercredithistory.md): this is endpoint is used to get a customer credit transaction history in a pagination form of credit membership product.
+- [Regist New Customer](https://docs.mayar.id/api-reference/creditbasedproduct/registernewcustomer.md): This endpoint is used to register new customers into the membership credit product.
+- [Spend Customer Credit](https://docs.mayar.id/api-reference/creditbasedproduct/spendcustomercredit.md): This endpoint is used to spend a specified amount of credit from a member’s account on particular membership tier on membership credit product.
+- [Create Customer](https://docs.mayar.id/api-reference/customer/create.md): Endpoint used to create customer
+- [Create Magic Link](https://docs.mayar.id/api-reference/customer/createmagiclink.md): Endpoint to create magic link and send to customer email for their login in our customer portal
+- [Get Customer](https://docs.mayar.id/api-reference/customer/getdetail.md): Endpoint where you can get your customer details
+- [Update Customer Email](https://docs.mayar.id/api-reference/customer/update.md): Endpoint is used to update customer email.
+- [Create Discount with Coupon](https://docs.mayar.id/api-reference/discount/create.md): Endpoint used to create discount coupons
+- [Get Coupon Detail](https://docs.mayar.id/api-reference/discount/detail.md): Endpoint used to view details and status of coupon that have been created
+- [Validate Coupon](https://docs.mayar.id/api-reference/discount/validate.md): Endpoint used to validate whether a coupon code has been used or not
+- [POST Create Installment](https://docs.mayar.id/api-reference/installment/create.md): Endpoint used to create installment
+- [Get Installment Detail](https://docs.mayar.id/api-reference/installment/detail.md): Endpoint used to view details and status of installment that have been created
+- [Introduction](https://docs.mayar.id/api-reference/introduction.md): Section for showcasing API endpoints
+- [Close Invoice](https://docs.mayar.id/api-reference/invoice/close.md): Endpoint used to change the invoice status to closed
+- [Create Invoice](https://docs.mayar.id/api-reference/invoice/create.md): Endpoint used to create invoices
+- [Get Detail / Invoice Status](https://docs.mayar.id/api-reference/invoice/detail.md): Endpoint used to view details and status of invoices that have been created
+- [Edit Invoice](https://docs.mayar.id/api-reference/invoice/edit.md): Endpoint used to edit invoices that have been created.
+- [Get Sort / Filter Invoice](https://docs.mayar.id/api-reference/invoice/filter.md): Endpoint used to filter invoices that have been created
+- [Get List Invoice](https://docs.mayar.id/api-reference/invoice/index.md): Endpoint used to view details of the number of invoices that have been created
+- [Re-open Invoice](https://docs.mayar.id/api-reference/invoice/reopen.md): Endpoint used to change invoice status from closed to open
+- [Verify License](https://docs.mayar.id/api-reference/licensecode/verifylicense.md): Endpoint to verify a license by providing the license code and product ID.
+- [Close Product](https://docs.mayar.id/api-reference/product/close.md): Endpoint used to change the product status to closed
+- [Get Detail Product](https://docs.mayar.id/api-reference/product/detail.md): Endpoint where you can get your detail products
+- [Get Product Page](https://docs.mayar.id/api-reference/product/productpage.md): Endpoint where you can get your products
+- [Get Product Page with Type Filter](https://docs.mayar.id/api-reference/product/productpagewithfilter.md): Endpoint where you can get your products with type filter
+- [Re-open Product](https://docs.mayar.id/api-reference/product/reopen.md): Endpoint used to change product status from closed to open
+- [Search Product](https://docs.mayar.id/api-reference/product/search.md): Endpoint used to search for products by product name
+- [API Rate Limit](https://docs.mayar.id/api-reference/rate-limit.md): API Rate limit per minute
+- [Close Single Payment Request](https://docs.mayar.id/api-reference/reqpayment/close.md): Endpoint used to change the single payment request status to closed
+- [Create Single Payment Request](https://docs.mayar.id/api-reference/reqpayment/create.md): Endpoint used to create single payment request
+- [Get Detail Single Payment Request](https://docs.mayar.id/api-reference/reqpayment/detail.md): Endpoint used to view details of single payment request that have been created
+- [Edit Single Payment Request](https://docs.mayar.id/api-reference/reqpayment/edit.md): Endpoint used to edit billing that has been created
+- [Get Sort / Filter Single Payment Request Page](https://docs.mayar.id/api-reference/reqpayment/filter.md): Endpoint used to filter single payment request that have been created
+- [Get List Single Payment Request](https://docs.mayar.id/api-reference/reqpayment/index.md): Endpoint used to view details of the number of single payment request that have been created
+- [Re-open Single Payment Request](https://docs.mayar.id/api-reference/reqpayment/reopen.md): Endpoint used to change single payment request status from closed to open
+- [Activate License](https://docs.mayar.id/api-reference/saas/activate.md): Endpoint to activate a license by providing the license code and product ID.
+- [Deactivate License](https://docs.mayar.id/api-reference/saas/deactivate.md): Endpoint to deactivate a license by providing the license code and product ID.
+- [Verify License SaaS Subscription](https://docs.mayar.id/api-reference/saas/verify.md): Endpoint to verify license by providing license code and product ID in Saas Subscription Product.
+- [Status Code](https://docs.mayar.id/api-reference/statuscode.md): Status Code From API Endpoint Request Results.
+- [Get Account Balance](https://docs.mayar.id/api-reference/transaction/accountbalance.md): Endpoint where you can get your account balance
+- [Create Dynamic QRCode](https://docs.mayar.id/api-reference/transaction/createdynamicqrcode.md): Endpoint used to create dynamic QRCode
+- [Get Paid Transactions](https://docs.mayar.id/api-reference/transaction/paidtransaction.md): Endpoint to get paid data transactions
+- [Get Unpaid Transaction](https://docs.mayar.id/api-reference/transaction/unpaidtransaction.md): Endpoint for get unpaid data transactions
+- [Add Customer Credit](https://docs.mayar.id/api-reference/usagebasedmembership/addcustomercredit.md): This endpoint is used to add credit to a customer’s or member’s account on particular membership tier.
+- [Get Customer Balance](https://docs.mayar.id/api-reference/usagebasedmembership/customerbalance.md): This is endpoint is used to get a customer credit balance.
+- [Get Paginate Customer Credit History](https://docs.mayar.id/api-reference/usagebasedmembership/paginatecustomercredithistory.md): This is endpoint is used to get a customer credit transaction history in a pagination form.
+- [Regist New Membership Customer](https://docs.mayar.id/api-reference/usagebasedmembership/registnewmembershipcustomer.md): This endpoint is used to register new customers into the membership credit product.
+- [Spend Customer Credit](https://docs.mayar.id/api-reference/usagebasedmembership/spendcustomercredit.md): This endpoint is used to spend a specified amount of credit from a customer’s or member’s account on particular membership tier.
+- [Get History](https://docs.mayar.id/api-reference/webhook/history.md): Endpoint to get data webhook history
+- [Register URL Hook](https://docs.mayar.id/api-reference/webhook/registerurlhook.md): Endpoint to register your URL Hook for Webhook
+- [Retry History](https://docs.mayar.id/api-reference/webhook/retryhistory.md): Endpoint retry your webhook history data
+- [Test URL Hook](https://docs.mayar.id/api-reference/webhook/testurlhook.md): Endpoint to testing your URL Hook for Webhook
+- [Business Verification](https://docs.mayar.id/businessverify.md): In this section, we'll explore the Business Verification Form and explain the different verification statuses you might come across.
+- [Affiliate](https://docs.mayar.id/features/affiliate.md): Create affiliate and referral program for your products, manage thousands resellers effortlessly with automated trackiing and automated commission payment.
+- [Product Analytics](https://docs.mayar.id/features/analytics.md): A quick glance for your product traffic and sales metrics
+- [Balance](https://docs.mayar.id/features/balance.md): See your active and pending balance in one page.
+- [Bio Link & Catalog](https://docs.mayar.id/features/biolinkcatalog.md): Try the Biolink & Catalog feature in Mayar for a simpler and more efficient way to shop and share links!
+- [Broadcast](https://docs.mayar.id/features/broadcast.md): Braodcast your message, promotion and information yo tour customers quickly and easily.
+- [Bundling](https://docs.mayar.id/features/bundling.md): Boost your sales and enhance your offers with Mayar’s product bundling feature — available now!
+- [Checkout Settings](https://docs.mayar.id/features/checkoutsetting.md): Customize further the checkout experience for your customers
+- [Cross-Sell](https://docs.mayar.id/features/crosssell.md): Boost your sales by using the Cross-Sell feature in Mayar and offer the right product recommendations to your customers!
+- [Customer Management](https://docs.mayar.id/features/customermanagement.md): Manage and Maintain relation with your customers.
+- [Customer Portal](https://docs.mayar.id/features/customerportal.md): Customer portal is a gateway for your customers to access all products and services they bought from you.
+- [Custom Form](https://docs.mayar.id/features/customform.md): Create new input fields for checkout by using the Custom Form feature on Mayar to adjust your Payment Form according to your needs.
+- [Dashboard](https://docs.mayar.id/features/dashboard.md): The front page of your business shows key metrics, new transactions, and customer feedback in one place.
+- [Discount & Coupon](https://docs.mayar.id/features/discount.md): Boost your business growth by using the discount feature on Mayar to attract and retain more customers!
+- [Landing Page](https://docs.mayar.id/features/landingpage.md): A fast and beautiful single page website for your product.
+- [Order](https://docs.mayar.id/features/order.md): Manage order for physical product, from printing label, request pickup to tracking shipment.
+- [Payment Method Settings](https://docs.mayar.id/features/paymentmethodsetting.md): Enhance your customer’s payment experience and boost conversion with various payment method
+- [Audio Book](https://docs.mayar.id/features/productpage/audiobook.md): Explore the world of stories with our captivating Audio Book feature!
+- [Cohort Based Bootcamp](https://docs.mayar.id/features/productpage/bootcamp.md): Find your best Bootcamp course for your career path!
+- [Coaching & Mentoring](https://docs.mayar.id/features/productpage/coaching.md): Try to find your Passion and let the Coach & Mentor guide your Passion!
+- [Web Comic](https://docs.mayar.id/features/productpage/comic.md): Explore a world of endless imagination with our fun and entertaining Web Comic product!
+- [Creator Support Page](https://docs.mayar.id/features/productpage/creatorsupportpage.md): Try the Creator Support Page to get the support and resources you need!
+- [Digital Product](https://docs.mayar.id/features/productpage/digitalproduct.md): Explore our latest Digital Product feature, designed to significantly enhance your ability to create, manage, and sell digital content with unparalleled ease and efficiency. This innovative feature empowers you to transform your ideas into market-ready digital products.
+- [E-Book](https://docs.mayar.id/features/productpage/ebook.md): Discover the exciting features of our Ebook product for a better reading experience!
+- [Event](https://docs.mayar.id/features/productpage/event.md): Create your Event base on your own creativity with Mayar!
+- [Fundraising](https://docs.mayar.id/features/productpage/fundraising.md): Specialized approach that combines elements of traditional product sales with fundraising efforts. Try it now!
+- [License Software](https://docs.mayar.id/features/productpage/licensesoftware.md): Try our latest Software License feature to boost your efficiency and productivity today!
+- [Membership](https://docs.mayar.id/features/productpage/membership.md): Discover exclusive benefits by joining our Membership and enjoy a whole new experience!
+- [Online Course](https://docs.mayar.id/features/productpage/onlinecourse.md): Find your best Online Course to improve and gain more ability of your skill set!
+- [Payment Link](https://docs.mayar.id/features/productpage/paymentlink.md): Discover exclusive Payment Links and enjoy a whole new experience!
+- [Physical Product](https://docs.mayar.id/features/productpage/physicalproduct.md): Explore our latest Physical Product feature, designed to significantly enhance your ability to create, manage, and sell Physical Product with unparalleled ease and efficiency. This innovative feature empowers you to transform your ideas into market-ready Physical Product.
+- [Podcast](https://docs.mayar.id/features/productpage/podcast.md): Try our latest Podcast feature for a richer and more interactive listening experience!
+- [Membership (SaaS)](https://docs.mayar.id/features/productpage/saas.md): Try our SaaS product today to boost your business efficiency with an innovative and easy-to-use solution!
+- [Membership (Credit) ](https://docs.mayar.id/features/productpage/usagebasedmembership.md): Boost your software sales efficiency with Mayar’s flexible and easy-to-manage credit-based membership system!
+- [Webinar](https://docs.mayar.id/features/productpage/webinar.md): Find your best Webinar to gain your knowledge!
+- [Writing](https://docs.mayar.id/features/productpage/writing.md): Experience the uniqueness and quality of *Writing* by trying our product today!
+- [Product Tag](https://docs.mayar.id/features/producttag.md): Help customers filter and found your product faster using tag system.
+- [Rating & Review](https://docs.mayar.id/features/rating.md): Customer feedback automatically collected by Mayar collection system.
+- [Package Pickup & Shipping](https://docs.mayar.id/features/shipping.md): Enable or disable various 3rd party logistics in one page.
+- [Storefront](https://docs.mayar.id/features/storefront.md): Make your store front page stunning with many types of storefronts.
+- [Tracking (Pixel, Tag Manager, and UTM Param)](https://docs.mayar.id/features/tracking.md): Try the Tracking feature on Mayar to gain better business insights through Meta, Google Tag Manager and UTM Param Tracking!
+- [Introduction](https://docs.mayar.id/index.md): Mayar is a simple and powerful platform that helps businesses sell products and accept payments online quickly and easily. Whether you're selling online courses, e-book, membership, offering services, or managing subscriptions, Mayar provides all the tools you need — from account setup and product listings to seamless payment processing and integration with popular apps. Designed for both technical and non-technical users, Mayar supports your business growth with user-friendly features, no-code tools, and reliable support.
+- [Mayar MCP Server](https://docs.mayar.id/integration/MCP.md): Integrate and Manage Your Business with Mayar MCP Server and AI
+- [Plugin Store](https://docs.mayar.id/integration/PluginStore.md): The Plugin Store feature in Mayar allows users to add various third-party integrations and extensions to expand system functionality according to their business needs.
+- [Telegram Notification](https://docs.mayar.id/integration/TelegramNotification.md): The Telegram Notification feature in Mayar allows users to receive real-time notifications about transactions, purchases, or other important activities directly through the Telegram app.
+- [Webhook](https://docs.mayar.id/integration/webhook.md): Enable webhook on Mayar to receive real-time notifications and automate data processes that simplify your business management!
+- [Whatsapp (Unofficial)](https://docs.mayar.id/integration/whatsapp.md): Activate the WhatsApp (Unofficial) feature in MAYAR now to ensure your customers receive transaction notifications quickly and efficiently—boosting their satisfaction and trust in your service.
+- [Acceptable Use](https://docs.mayar.id/mor/acceptableuse.md): As your Merchant of Record (MoR), we are the reseller of all digital goods and services and focus exclusively on digital products. Therefore we cannot support physical goods or entirely human services, e.g consultation or support. In addition to not accepting the sale of anything illegal, harmful, abusive, deceptive or sketchy.
+- [Account Review](https://docs.mayar.id/mor/accountreview.md): As a Merchant of Record (MoR), we act as the reseller of digital goods and services. Therefore, we need to make sure that businesses using Mayar complies with our acceptable products & use policies. Combined with continuously monitoring, reviewing and preventing fraud, unacceptable use, bad actors and high risk accounts.
+- [Fees](https://docs.mayar.id/mor/fees.md): Information on Fee Deductions for Using the Mayar Platform
+- [Introduction](https://docs.mayar.id/mor/introduction.md): Mayar is an e-commerce merchant of record
+- [Security](https://docs.mayar.id/mor/security.md): Overview of Mayar’s security practices and compliance measures.
+- [Online Payment Method](https://docs.mayar.id/onlinepaymentmethod.md): Try Mayar online payment methods now and experience fast, secure, and convenient transactions!
+
+## OpenAPI Specs
+
+- [openapi](https://docs.mayar.id/api-reference/openapi.json)
+
+## Optional
+
+- [Community](https://t.me/mcngroup)
+- [Blog](https://blog.mayar.id/)

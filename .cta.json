@@ -1,0 +1,22 @@
+{
+  "projectName": "ruteai",
+  "mode": "file-router",
+  "typescript": true,
+  "tailwind": true,
+  "packageManager": "npm",
+  "git": true,
+  "install": true,
+  "addOnOptions": {},
+  "includeExamples": true,
+  "envVarValues": {},
+  "routerOnly": false,
+  "version": 1,
+  "framework": "react",
+  "chosenAddOns": [
+    "convex",
+    "form",
+    "tanstack-query",
+    "better-auth",
+    "eslint"
+  ]
+}
