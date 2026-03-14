@@ -12,14 +12,15 @@
 
 ## 2. Convex Database Schema
 
-- [ ] 2.1 Create customers table schema
+- [ ] 2.1 Create customers table schema with Mayar membership ID
 - [ ] 2.2 Create apiKeys table schema with hashed keys
-- [ ] 2.3 Create creditTransactions table schema
+- [ ] 2.3 Create creditTransactions table schema (synced from Mayar)
 - [ ] 2.4 Create usageLogs table schema
 - [ ] 2.5 Create models table schema for LLM configurations
 - [ ] 2.6 Create rateLimitLogs table schema
 - [ ] 2.7 Create webhookLogs table schema
-- [ ] 2.8 Set up Convex indexes for efficient queries
+- [ ] 2.8 Create mayarMembershipCache table for credit balance caching
+- [ ] 2.9 Set up Convex indexes for efficient queries
 
 ## 3. API Key Management
 
@@ -31,27 +32,28 @@
 - [ ] 3.6 Create API key middleware for TanStack Start API routes
 - [ ] 3.7 Add API key authentication tests
 
-## 4. Credit System
+## 4. Credit System (Mayar Usage-Based Membership)
 
-- [ ] 4.1 Implement get customer balance function (Convex query)
-- [ ] 4.2 Implement add customer credit function (Convex mutation)
-- [ ] 4.3 Implement spend customer credit function with validation
-- [ ] 4.4 Implement refund credit function for unused tokens
-- [ ] 4.5 Create Mayar checkout link generation function
-- [ ] 4.6 Implement transaction history query with pagination
-- [ ] 4.7 Add credit system integration tests
+- [ ] 4.1 Create Mayar Usage-Based Membership product for credit system
+- [ ] 4.2 Implement register new customer in Mayar membership (registNewMembershipCustomer)
+- [ ] 4.3 Implement get customer credit balance from Mayar (customerBalance)
+- [ ] 4.4 Implement add customer credit via Mayar API (addCustomerCredit)
+- [ ] 4.5 Implement spend customer credit via Mayar API (spendCustomerCredit)
+- [ ] 4.6 Implement get paginated customer credit history from Mayar
+- [ ] 4.7 Create local credit cache/sync mechanism for performance
+- [ ] 4.8 Implement refund credit function for unused tokens
+- [ ] 4.9 Add credit system integration tests with Mayar API
 
-## 5. Mayar Integration
+## 5. Mayar Payment Integration
 
 - [ ] 5.1 Set up Mayar API client with authentication
-- [ ] 5.2 Implement register customer in Mayar function
-- [ ] 5.3 Implement generate immutable checkout link function
-- [ ] 5.4 Create webhook signature verification utility
-- [ ] 5.5 Implement webhook handler HTTP action (Convex)
-- [ ] 5.6 Add webhook processing for payment success
-- [ ] 5.7 Add webhook idempotency handling
-- [ ] 5.8 Create webhook retry mechanism
-- [ ] 5.9 Add Mayar integration tests
+- [ ] 5.2 Implement generate immutable checkout link for credit top-up
+- [ ] 5.3 Create webhook signature verification utility
+- [ ] 5.4 Implement webhook handler HTTP action (Convex)
+- [ ] 5.5 Add webhook processing for payment success (addCustomerCredit callback)
+- [ ] 5.6 Add webhook idempotency handling
+- [ ] 5.7 Create webhook retry mechanism
+- [ ] 5.8 Add Mayar integration tests
 
 ## 6. LLM Proxy
 
