@@ -66,23 +66,23 @@
 - [x] 7.6 Create top-up page with amount selection and Mayar checkout link
 - [x] 7.7 Implement transaction history page (credit history from local Convex DB)
 
-## 8. LLM Proxy (Verify → Balance → Route → Stream → Deduct → Log)
+## 8. LLM Proxy (Verify → Balance → Route → Stream → Deduct → Log) ✅
 
-- [ ] 8.1 Create model configuration seed data (OpenAI, Anthropic, Gemini models with pricing)
-- [ ] 8.2 Implement model routing logic — resolve model ID to provider + upstream model
-- [ ] 8.3 Implement OpenAI provider client
-- [ ] 8.4 Implement Anthropic provider client with request/response transformation
-- [ ] 8.5 Implement Google Gemini provider client with transformation
-- [ ] 8.6 Add streaming response support (SSE)
-- [ ] 8.7 Create API key verification utility using `auth.api.verifyApiKey()` for proxy routes
-- [ ] 8.8 Implement local credit deduction (Convex mutation)
-- [ ] 8.9 Implement token counting utility (extract from provider response)
-- [ ] 8.10 Implement cost calculation and credit deduction after response
-- [ ] 8.11 Create usage log recording function (Convex mutation)
-- [ ] 8.12 Create TanStack Start API route for `/v1/chat/completions` — full pipeline: verify API key → check credit balance → route to provider → stream response → count tokens → deduct credits → log usage
-- [ ] 8.13 Create TanStack Start API route for `/v1/models` — list available models
-- [ ] 8.14 Implement error handling for provider failures and insufficient credits
-- [ ] 8.15 Add usage analytics queries and display on dashboard overview
+- [x] 8.1 Create model configuration seed data (OpenAI, Anthropic, Gemini models with pricing)
+- [x] 8.2 Implement model routing logic — resolve model ID to provider + upstream model
+- [x] 8.3 Implement OpenAI provider client
+- [x] 8.4 Implement Anthropic provider client with request/response transformation
+- [x] 8.5 Implement Google Gemini provider client with transformation
+- [x] 8.6 Add streaming response support (SSE)
+- [x] 8.7 Create API key verification utility using `auth.api.verifyApiKey()` for proxy routes
+- [x] 8.8 Implement local credit deduction (Convex mutation)
+- [x] 8.9 Implement token counting utility (extract from provider response)
+- [x] 8.10 Implement cost calculation and credit deduction after response
+- [x] 8.11 Create usage log recording function (Convex mutation)
+- [x] 8.12 Create TanStack Start API route for `/v1/chat/completions` — full pipeline: verify API key → check credit balance → route to provider → stream response → count tokens → deduct credits → log usage
+- [x] 8.13 Create TanStack Start API route for `/v1/models` — list available models
+- [x] 8.14 Implement error handling for provider failures and insufficient credits
+- [x] 8.15 Add usage analytics queries and display on dashboard overview
 
 ## 9. Deployment
 
