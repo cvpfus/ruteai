@@ -24,23 +24,24 @@
 - [x] 2.9 Create `ConvexBetterAuthProvider` wrapper component
 - [x] 2.10 Set up environment variables in Convex deployment (`BETTER_AUTH_SECRET`, `SITE_URL`)
 
-## 3. Database Schema
+## 3. Database Schema ✅
 
-- [ ] 3.1 Create customers table schema with Mayar membership ID and Better Auth user ID
-- [ ] 3.2 Create creditTransactions table schema (synced from Mayar)
-- [ ] 3.3 Create models table schema for LLM configurations (provider, modelId, pricing per 1K tokens, enabled flag)
-- [ ] 3.4 Create usageLogs table schema
-- [ ] 3.5 Create webhookLogs table schema
-- [ ] 3.6 Set up Convex indexes for efficient queries
+- [x] 3.1 Create customers table schema with Mayar customer ID, Better Auth user ID, and creditBalance
+- [x] 3.2 Create creditTransactions table schema (managed locally in Convex)
+- [x] 3.3 Create models table schema for LLM configurations (provider, modelId, pricing per 1K tokens, enabled flag)
+- [x] 3.4 Create usageLogs table schema
+- [x] 3.5 Create webhookLogs table schema
+- [x] 3.6 Set up Convex indexes for efficient queries
 
-## 4. Sign-Up, Sign-In & Customer Registration
+## 4. Sign-Up, Sign-In & Customer Registration ✅
 
-- [ ] 4.1 Create public landing/home page with sign-in/sign-up CTA
-- [ ] 4.2 Implement sign-up page using `authClient.signUp.email`
-- [ ] 4.3 Implement sign-in page using `authClient.signIn.email`
-- [ ] 4.4 Set up Mayar API client with authentication (Convex action)
-- [ ] 4.5 Implement register new customer in Mayar membership (`registNewMembershipCustomer`), linked to Better Auth user ID
-- [ ] 4.6 Add auto-registration trigger: on Better Auth sign-up, create Mayar membership customer and Convex `customers` record
+- [x] 4.1 Create public landing/home page with sign-in/sign-up CTA
+- [x] 4.2 Implement sign-up page using `authClient.signUp.email`
+- [x] 4.3 Implement sign-in page using `authClient.signIn.email`
+- [x] 4.4 Set up Mayar API client with authentication (Convex action)
+- [x] 4.5 Implement customer creation via Mayar API (`/hl/v1/customer/create`) to get `customerId`
+- [x] 4.6 Add auto-registration trigger: on Better Auth sign-up, create Mayar customer and link `customerId` in Convex `customers` record
+
 
 ## 5. Dashboard Shell & Route Protection
 
@@ -57,13 +58,13 @@
 
 ## 7. Credit Top-Up & Payment (Backend + Frontend)
 
-- [ ] 7.1 Implement get customer credit balance from Mayar (`customerBalance`)
-- [ ] 7.2 Implement generate immutable checkout link for credit top-up
+- [ ] 7.1 Implement get customer credit balance from local Convex DB
+- [ ] 7.2 Implement generate single payment link via Mayar API for credit top-up
 - [ ] 7.3 Create webhook signature verification utility
 - [ ] 7.4 Implement webhook handler HTTP action (Convex) — mounted alongside Better Auth routes in `convex/http.ts`
-- [ ] 7.5 Add webhook processing for payment success (`addCustomerCredit` callback)
+- [ ] 7.5 Add webhook processing for payment success (update local `creditBalance` and log transaction)
 - [ ] 7.6 Create top-up page with amount selection and Mayar checkout link
-- [ ] 7.7 Implement transaction history page (credit history from Mayar)
+- [ ] 7.7 Implement transaction history page (credit history from local Convex DB)
 
 ## 8. LLM Proxy (Verify → Balance → Route → Stream → Deduct → Log)
 
@@ -74,7 +75,7 @@
 - [ ] 8.5 Implement Google Gemini provider client with transformation
 - [ ] 8.6 Add streaming response support (SSE)
 - [ ] 8.7 Create API key verification utility using `auth.api.verifyApiKey()` for proxy routes
-- [ ] 8.8 Implement spend customer credit via Mayar API (`spendCustomerCredit`)
+- [ ] 8.8 Implement local credit deduction (Convex mutation)
 - [ ] 8.9 Implement token counting utility (extract from provider response)
 - [ ] 8.10 Implement cost calculation and credit deduction after response
 - [ ] 8.11 Create usage log recording function (Convex mutation)
