@@ -204,7 +204,7 @@ function SignUp() {
             id="sign-up-submit"
             type="submit"
             disabled={anyPending}
-            className="w-full h-[52px] bg-[var(--accent-gold)] hover:bg-[var(--accent-gold-hover)] text-[var(--bg-sidebar)] font-semibold text-sm rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
+            className="w-full h-[52px] bg-[var(--accent-gold)] hover:bg-[var(--accent-gold-hover)] !text-[#0A0A0A] font-semibold text-sm rounded-lg transition-colors flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {isPending && <Loader2 className="h-4 w-4 animate-spin" />}
             {isPending ? 'Creating account…' : 'Create Account'}
