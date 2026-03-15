@@ -43,28 +43,28 @@
 - [x] 4.6 Add auto-registration trigger: on Better Auth sign-up, create Mayar customer and link `customerId` in Convex `customers` record
 
 
-## 5. Dashboard Shell & Route Protection
+## 5. Dashboard Shell & Route Protection ✅
 
-- [ ] 5.1 Add route protection using Better Auth session (redirect unauthenticated users)
-- [ ] 5.2 Create dashboard layout with sidebar navigation
-- [ ] 5.3 Implement overview page with stats cards (balance, usage, API key count)
+- [x] 5.1 Add route protection using Better Auth session (redirect unauthenticated users)
+- [x] 5.2 Create dashboard layout with sidebar navigation
+- [x] 5.3 Implement overview page with stats cards (balance, usage, API key count)
 
-## 6. API Key Management (Backend + Frontend)
+## 6. API Key Management (Backend + Frontend) ✅
 
-- [ ] 6.1 Create Convex mutation to create API keys via `auth.api.createApiKey()` with tier-based rate limits
-- [ ] 6.2 Create Convex mutation to revoke API keys via `auth.api.deleteApiKey()`
-- [ ] 6.3 Create Convex query to list API keys via `auth.api.listApiKeys()` with pagination
-- [ ] 6.4 Create API keys management page (list, create, revoke)
+- [x] 6.1 Create Convex mutation to create API keys via `auth.api.createApiKey()` with tier-based rate limits
+- [x] 6.2 Create Convex mutation to revoke API keys via `auth.api.deleteApiKey()`
+- [x] 6.3 Create Convex query to list API keys via `auth.api.listApiKeys()` with pagination
+- [x] 6.4 Create API keys management page (list, create, revoke)
 
-## 7. Credit Top-Up & Payment (Backend + Frontend)
+## 7. Credit Top-Up & Payment (Backend + Frontend) ✅
 
-- [ ] 7.1 Implement get customer credit balance from local Convex DB
-- [ ] 7.2 Implement generate single payment link via Mayar API for credit top-up
-- [ ] 7.3 Create webhook signature verification utility
-- [ ] 7.4 Implement webhook handler HTTP action (Convex) — mounted alongside Better Auth routes in `convex/http.ts`
-- [ ] 7.5 Add webhook processing for payment success (update local `creditBalance` and log transaction)
-- [ ] 7.6 Create top-up page with amount selection and Mayar checkout link
-- [ ] 7.7 Implement transaction history page (credit history from local Convex DB)
+- [x] 7.1 Implement get customer credit balance from local Convex DB
+- [x] 7.2 Implement generate single payment link via Mayar API for credit top-up
+- [x] 7.3 Create webhook signature verification utility
+- [x] 7.4 Implement webhook handler HTTP action (Convex) — mounted alongside Better Auth routes in `convex/http.ts`
+- [x] 7.5 Add webhook processing for payment success (update local `creditBalance` and log transaction)
+- [x] 7.6 Create top-up page with amount selection and Mayar checkout link
+- [x] 7.7 Implement transaction history page (credit history from local Convex DB)
 
 ## 8. LLM Proxy (Verify → Balance → Route → Stream → Deduct → Log)
 
