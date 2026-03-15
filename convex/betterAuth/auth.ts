@@ -8,7 +8,6 @@ import { components, internal } from '../_generated/api'
 import type { DataModel } from '../_generated/dataModel'
 import authConfig from '../auth.config'
 import schema from './schema'
-
 const siteUrl = process.env.SITE_URL!
 
 // Better Auth Component
