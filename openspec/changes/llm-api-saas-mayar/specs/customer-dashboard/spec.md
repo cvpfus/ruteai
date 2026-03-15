@@ -2,19 +2,30 @@
 
 ## ADDED Requirements
 
-### Requirement: Dashboard Authentication
-The system SHALL require authentication for accessing the customer dashboard.
+### Requirement: Dashboard Authentication (via Better Auth)
+The system SHALL require Better Auth authentication for accessing the customer dashboard.
 
 #### Scenario: Access dashboard
 - **WHEN** an unauthenticated user attempts to access the dashboard
-- **THEN** the system SHALL redirect them to the login page
-- **AND** after successful login, redirect back to the requested page
+- **THEN** the system SHALL redirect them to the sign-in page
+- **AND** after successful login via Better Auth, redirect back to the requested page
 
-#### Scenario: Magic link login
-- **WHEN** a customer requests a magic link
-- **THEN** the system SHALL generate a one-time login link
-- **AND** send it to the customer's email
-- **AND** expire the link after 15 minutes
+#### Scenario: Email/password sign-up
+- **WHEN** a new user submits the sign-up form
+- **THEN** the system SHALL call `authClient.signUp.email()` to create an account
+- **AND** create a Better Auth user and session
+- **AND** redirect to the dashboard
+
+#### Scenario: Email/password sign-in
+- **WHEN** an existing user submits the sign-in form
+- **THEN** the system SHALL call `authClient.signIn.email()` to authenticate
+- **AND** establish a session via Better Auth
+- **AND** redirect to the dashboard
+
+#### Scenario: Sign out
+- **WHEN** a user clicks sign out
+- **THEN** the system SHALL call `authClient.signOut()` to end the session
+- **AND** redirect to the sign-in page
 
 ### Requirement: Dashboard Overview
 The system SHALL provide an overview of account status on the dashboard.

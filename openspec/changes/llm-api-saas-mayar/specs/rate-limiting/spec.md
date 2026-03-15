@@ -3,7 +3,7 @@
 ## ADDED Requirements
 
 ### Requirement: Tiered Rate Limits
-The system SHALL enforce rate limits based on customer subscription tier.
+The system SHALL enforce rate limits based on customer tier. RPM limits are handled by Better Auth API Key plugin's built-in rate limiting (`rateLimitMax`, `rateLimitTimeWindow`). Daily request/token limits are enforced by custom Convex logic.
 
 #### Scenario: Free tier limits
 - **WHEN** a customer on the Free tier makes API requests
@@ -59,14 +59,13 @@ The system SHALL include rate limit information in API responses.
   - X-RateLimit-Remaining: remaining requests in current window
   - X-RateLimit-Reset: Unix timestamp when the limit resets
 
-### Requirement: Sliding Window Rate Limiting
-The system SHALL use a sliding window algorithm for rate limiting.
+### Requirement: RPM Rate Limiting (Better Auth API Key Plugin)
+The system SHALL use Better Auth API Key plugin's built-in rate limiting for per-minute request limits.
 
-#### Scenario: Sliding window calculation
-- **WHEN** calculating rate limit usage
-- **THEN** the system SHALL count requests in a sliding time window
-- **AND** not use fixed time buckets
-- **AND** provide smooth rate limiting without burst issues at window boundaries
+#### Scenario: RPM rate limit enforcement
+- **WHEN** an API key is verified via `auth.api.verifyApiKey()`
+- **THEN** Better Auth SHALL automatically enforce the key's `rateLimitMax` within `rateLimitTimeWindow`
+- **AND** reject requests exceeding the limit
 
 ### Requirement: Rate Limit Bypass for Internal
 The system SHALL allow internal/admin requests to bypass rate limits.

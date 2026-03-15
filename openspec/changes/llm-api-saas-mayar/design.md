@@ -2,7 +2,7 @@
 
 ## Context
 
-This is a greenfield project to build an LLM API proxy service for Indonesian customers. The service will use TanStack Start for the full-stack React framework, Convex as the backend database and server functions, and Mayar as the payment gateway. The architecture needs to support real-time credit balance updates, API key authentication, and proxy requests to multiple LLM providers.
+This is a greenfield project to build an LLM API proxy service for Indonesian customers. The service will use TanStack Start for the full-stack React framework, Convex as the backend database and server functions, Better Auth (with `@convex-dev/better-auth` component) for user authentication and API key management, and Mayar as the payment gateway. The architecture needs to support real-time credit balance updates, API key authentication, and proxy requests to multiple LLM providers.
 
 Key constraints:
 - Must use Rupiah (IDR) currency via Mayar
@@ -58,18 +58,29 @@ Key constraints:
 - Separate Node.js backend: Rejected for added complexity
 - Supabase: Rejected for less reactive query support
 
-### 3. API Key Storage
-**Decision:** Store hashed API keys in Convex, show plaintext only once on creation.
+### 3. Better Auth for Authentication & API Keys
+**Decision:** Use Better Auth with `@convex-dev/better-auth` Convex component for user authentication, and `@better-auth/api-key` plugin for API key management.
 
 **Rationale:**
-- Security best practice
-- Keys are unrecoverable if lost (forces regeneration)
-- Hashing prevents key leakage if database compromised
+- TypeScript-first, framework-agnostic auth library with first-class Convex integration
+- Official `@convex-dev/better-auth` component maintained by Convex team
+- Built-in TanStack Start integration support
+- `@better-auth/api-key` plugin provides complete API key lifecycle (create, verify, revoke, list) with built-in rate limiting, expiration, and hashed storage
+- Eliminates need for custom auth and API key hashing implementations
+- Supports email/password, social OAuth (Google, GitHub), and extensible via plugins
+
+**Alternatives considered:**
+- Custom auth implementation: Rejected for security risks and development overhead
+- Clerk/Auth0: Rejected for cost and less control over Convex integration
+- Convex Auth: Rejected for less flexibility and no API key plugin
 
 **Implementation:**
-- Use bcrypt or SHA-256 for hashing
-- Store key prefix for identification (e.g., `rute_` + first 8 chars)
-- Full key shown only in creation response
+- Better Auth server runs as a Convex component (`convex/betterAuth/`)
+- Auth routes mounted via `authComponent.registerRoutes(http, createAuth)` in `convex/http.ts`
+- Client uses `createAuthClient` with `convexClient()` and `apiKeyClient()` plugins
+- API keys created with `rute_` prefix via `@better-auth/api-key`
+- API key verification via `auth.api.verifyApiKey()` in LLM proxy middleware
+- Session management via `ConvexBetterAuthProvider` wrapper
 
 ### 4. Request Routing Architecture
 **Decision:** Use TanStack Start API routes for proxying LLM requests.
@@ -81,7 +92,7 @@ Key constraints:
 
 **Flow:**
 ```
-Client Request → TanStack Start API Route → Convex (auth + billing) → LLM Provider → Response
+Client Request → TanStack Start API Route → Better Auth API Key verify → Convex (billing) → LLM Provider → Response
 ```
 
 ### 5. Credit Deduction Strategy
@@ -112,17 +123,18 @@ Client Request → TanStack Start API Route → Convex (auth + billing) → LLM 
 - Retry logic for failed webhooks
 
 ### 7. Rate Limiting
-**Decision:** Implement rate limiting in Convex with sliding window.
+**Decision:** Use Better Auth API Key plugin's built-in rate limiting for per-key RPM limits + custom Convex logic for daily/token limits.
 
 **Rationale:**
-- Centralized in database
-- Real-time enforcement
-- Can be adjusted per customer tier
+- `@better-auth/api-key` provides built-in `rateLimitMax`, `rateLimitTimeWindow`, and `rateLimitEnabled` per key
+- Eliminates custom sliding window implementation for RPM limits
+- Custom Convex logic only needed for daily request counts and token limits
+- Rate limit config set at key creation via `createApiKey({ rateLimitMax, rateLimitTimeWindow, rateLimitEnabled })`
 
-**Tiers:**
-- Free: 10 RPM, 100 requests/day
-- Basic: 60 RPM, 10K requests/day
-- Pro: 600 RPM, 100K requests/day
+**Tiers (configured per API key):**
+- Free: 10 RPM (`rateLimitMax: 10, rateLimitTimeWindow: 60000`), 100 requests/day, 10K tokens/day
+- Basic: 60 RPM, 10K requests/day, 1M tokens/day
+- Pro: 600 RPM, 100K requests/day, 10M tokens/day
 - Enterprise: Custom limits
 
 ## Risks / Trade-offs
