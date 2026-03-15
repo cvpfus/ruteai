@@ -23,7 +23,9 @@ import { Route as DemoConvexRouteImport } from './routes/demo/convex'
 import { Route as DemoBetterAuthRouteImport } from './routes/demo/better-auth'
 import { Route as DemoFormSimpleRouteImport } from './routes/demo/form.simple'
 import { Route as DemoFormAddressRouteImport } from './routes/demo/form.address'
+import { Route as ApiV1ModelsRouteImport } from './routes/api/v1/models'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
+import { Route as ApiV1ChatCompletionsRouteImport } from './routes/api/v1/chat/completions'
 
 const UsageRoute = UsageRouteImport.update({
   id: '/usage',
@@ -95,9 +97,19 @@ const DemoFormAddressRoute = DemoFormAddressRouteImport.update({
   path: '/demo/form/address',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiV1ModelsRoute = ApiV1ModelsRouteImport.update({
+  id: '/api/v1/models',
+  path: '/api/v1/models',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAuthSplatRoute = ApiAuthSplatRouteImport.update({
   id: '/api/auth/$',
   path: '/api/auth/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiV1ChatCompletionsRoute = ApiV1ChatCompletionsRouteImport.update({
+  id: '/api/v1/chat/completions',
+  path: '/api/v1/chat/completions',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -115,8 +127,10 @@ export interface FileRoutesByFullPath {
   '/demo/convex': typeof DemoConvexRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/v1/models': typeof ApiV1ModelsRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
+  '/api/v1/chat/completions': typeof ApiV1ChatCompletionsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -132,8 +146,10 @@ export interface FileRoutesByTo {
   '/demo/convex': typeof DemoConvexRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/v1/models': typeof ApiV1ModelsRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
+  '/api/v1/chat/completions': typeof ApiV1ChatCompletionsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -150,8 +166,10 @@ export interface FileRoutesById {
   '/demo/convex': typeof DemoConvexRoute
   '/demo/tanstack-query': typeof DemoTanstackQueryRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
+  '/api/v1/models': typeof ApiV1ModelsRoute
   '/demo/form/address': typeof DemoFormAddressRoute
   '/demo/form/simple': typeof DemoFormSimpleRoute
+  '/api/v1/chat/completions': typeof ApiV1ChatCompletionsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -169,8 +187,10 @@ export interface FileRouteTypes {
     | '/demo/convex'
     | '/demo/tanstack-query'
     | '/api/auth/$'
+    | '/api/v1/models'
     | '/demo/form/address'
     | '/demo/form/simple'
+    | '/api/v1/chat/completions'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -186,8 +206,10 @@ export interface FileRouteTypes {
     | '/demo/convex'
     | '/demo/tanstack-query'
     | '/api/auth/$'
+    | '/api/v1/models'
     | '/demo/form/address'
     | '/demo/form/simple'
+    | '/api/v1/chat/completions'
   id:
     | '__root__'
     | '/'
@@ -203,8 +225,10 @@ export interface FileRouteTypes {
     | '/demo/convex'
     | '/demo/tanstack-query'
     | '/api/auth/$'
+    | '/api/v1/models'
     | '/demo/form/address'
     | '/demo/form/simple'
+    | '/api/v1/chat/completions'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -221,8 +245,10 @@ export interface RootRouteChildren {
   DemoConvexRoute: typeof DemoConvexRoute
   DemoTanstackQueryRoute: typeof DemoTanstackQueryRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
+  ApiV1ModelsRoute: typeof ApiV1ModelsRoute
   DemoFormAddressRoute: typeof DemoFormAddressRoute
   DemoFormSimpleRoute: typeof DemoFormSimpleRoute
+  ApiV1ChatCompletionsRoute: typeof ApiV1ChatCompletionsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -325,11 +351,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DemoFormAddressRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/v1/models': {
+      id: '/api/v1/models'
+      path: '/api/v1/models'
+      fullPath: '/api/v1/models'
+      preLoaderRoute: typeof ApiV1ModelsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/auth/$': {
       id: '/api/auth/$'
       path: '/api/auth/$'
       fullPath: '/api/auth/$'
       preLoaderRoute: typeof ApiAuthSplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/v1/chat/completions': {
+      id: '/api/v1/chat/completions'
+      path: '/api/v1/chat/completions'
+      fullPath: '/api/v1/chat/completions'
+      preLoaderRoute: typeof ApiV1ChatCompletionsRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -349,8 +389,10 @@ const rootRouteChildren: RootRouteChildren = {
   DemoConvexRoute: DemoConvexRoute,
   DemoTanstackQueryRoute: DemoTanstackQueryRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,
+  ApiV1ModelsRoute: ApiV1ModelsRoute,
   DemoFormAddressRoute: DemoFormAddressRoute,
   DemoFormSimpleRoute: DemoFormSimpleRoute,
+  ApiV1ChatCompletionsRoute: ApiV1ChatCompletionsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
