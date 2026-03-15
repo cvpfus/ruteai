@@ -27,23 +27,31 @@ export default defineSchema({
     .index('by_mayarTransactionId', ['mayarTransactionId']),
 
   models: defineTable({
-    provider: v.string(), 
-    modelId: v.string(), 
-    pricingPer1kTokens: v.number(), 
-    enabled: v.boolean(),
+    modelId: v.string(), // ID we expose (e.g. gpt-4o)
+    name: v.string(),
+    provider: v.string(), // 'openai', 'anthropic', 'google'
+    providerModelId: v.string(), // Actual model ID for the provider
+    contextWindow: v.number(),
+    promptPricePer1k: v.number(), // IDR
+    completionPricePer1k: v.number(), // IDR
+    status: v.union(v.literal('active'), v.literal('deprecated'), v.literal('disabled')),
   })
     .index('by_provider', ['provider'])
     .index('by_modelId', ['modelId']),
 
   usageLogs: defineTable({
-    userId: v.string(), 
+    customerId: v.id('customers'), 
     apiKeyId: v.optional(v.string()), 
     modelId: v.id('models'),
-    tokensUsed: v.number(),
-    cost: v.number(),
+    promptTokens: v.number(),
+    completionTokens: v.number(),
+    cost: v.number(), // Total cost in IDR
     timestamp: v.number(),
+    responseTimeMs: v.number(),
+    status: v.union(v.literal('success'), v.literal('failed')),
+    error: v.optional(v.string()),
   })
-    .index('by_userId', ['userId'])
+    .index('by_customerId', ['customerId'])
     .index('by_apiKeyId', ['apiKeyId']),
 
   webhookLogs: defineTable({
