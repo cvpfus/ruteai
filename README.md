@@ -1,244 +1,306 @@
-Welcome to your new TanStack Start app! 
+# RuteAI - LLM API SaaS Platform
 
-# Getting Started
+A production-ready LLM API proxy service built for Indonesian developers and businesses. RuteAI provides OpenAI-compatible API endpoints with Rupiah (IDR) billing via Mayar payment gateway.
 
-To run this application:
+## Overview
+
+RuteAI is a full-stack SaaS platform that allows developers to access multiple LLM providers (OpenAI, Anthropic, Google Gemini) through a unified OpenAI-compatible API, with local payment methods (QRIS, Virtual Account, e-wallets) via Mayar.
+
+### Key Features
+
+- **OpenAI-Compatible API**: Drop-in replacement for OpenAI API with `/v1/chat/completions` and `/v1/models` endpoints
+- **Multi-Provider Support**: Route requests to OpenAI, Anthropic Claude, or Google Gemini based on model selection
+- **Credit-Based Billing**: Pay-per-use with IDR currency, top up via Mayar (QRIS, Virtual Account, e-wallets)
+- **API Key Management**: Generate, revoke, and manage API keys with built-in rate limiting
+- **Real-Time Dashboard**: Monitor balance, usage analytics, and API key activity
+- **Usage Tracking**: Token consumption tracking and cost calculation per request
+- **Webhook Integration**: Automatic credit top-ups via Mayar payment webhooks
+
+## Tech Stack
+
+- **Frontend**: TanStack Start (React + TypeScript)
+- **Backend**: Convex (Database + Server Functions + Real-time Queries)
+- **Authentication**: Better Auth with Convex integration
+- **Styling**: Tailwind CSS
+- **Payment**: Mayar Payment Gateway
+- **LLM Providers**: OpenAI, Anthropic, Google Gemini
+
+## Project Structure
+
+```
+├── convex/                    # Convex backend
+│   ├── _generated/           # Auto-generated Convex types
+│   ├── betterAuth/           # Better Auth component
+│   │   ├── _generated/      # Better Auth generated files
+│   │   ├── adapter.ts       # Auth adapter functions
+│   │   ├── auth.ts          # Better Auth instance
+│   │   ├── convex.config.ts # Component config
+│   │   └── schema.ts        # Auth schema
+│   ├── apiKeys.ts           # API key management
+│   ├── auth.config.ts       # Convex auth config
+│   ├── auth.ts              # Auth utilities
+│   ├── customers.ts         # Customer management
+│   ├── http.ts              # HTTP routes (auth + webhooks)
+│   ├── mayar.ts             # Mayar API integration
+│   ├── models.ts            # LLM model configurations
+│   ├── proxy.ts             # LLM proxy logic
+│   ├── schema.ts            # Database schema
+│   ├── usageLogs.ts         # Usage tracking
+│   └── webhooks.ts          # Webhook handlers
+├── src/
+│   ├── components/          # React components
+│   │   └── Sidebar.tsx      # Dashboard sidebar
+│   ├── lib/                 # Client libraries
+│   │   ├── auth-client.ts   # Better Auth client
+│   │   ├── auth-server.ts   # Server auth utilities
+│   │   └── llm-proxy.ts     # LLM proxy client
+│   ├── routes/              # TanStack Router routes
+│   │   ├── api/             # API routes
+│   │   │   ├── auth/        # Auth API routes
+│   │   │   └── v1/          # LLM API v1 routes
+│   │   │       ├── chat/completions.ts
+│   │   │       └── models.ts
+│   │   ├── api-keys.tsx     # API key management page
+│   │   ├── dashboard.tsx    # Dashboard overview
+│   │   ├── index.tsx        # Landing page
+│   │   ├── models.tsx       # Available models page
+│   │   ├── sign-in.tsx      # Sign in page
+│   │   ├── sign-up.tsx      # Sign up page
+│   │   ├── top-up.tsx       # Credit top-up page
+│   │   ├── transactions.tsx # Transaction history
+│   │   └── usage.tsx        # Usage analytics
+│   ├── router.tsx           # Router configuration
+│   └── styles.css           # Global styles
+├── .env.example             # Environment variables template
+└── package.json
+```
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- pnpm (recommended) or npm
+- Convex account (free tier available)
+- Mayar account for payments
+- LLM provider API keys (OpenAI, Anthropic, Google)
+
+### Installation
+
+1. **Clone and install dependencies:**
 
 ```bash
-npm install
-npm run dev
+pnpm install
 ```
 
-# Building For Production
+2. **Set up environment variables:**
 
-To build this application for production:
+Copy `.env.example` to `.env.local` and fill in your values:
 
 ```bash
-npm run build
+cp .env.example .env.local
 ```
 
-## Testing
+Required environment variables:
 
-This project uses [Vitest](https://vitest.dev/) for testing. You can run the tests with:
+```env
+# Convex
+VITE_CONVEX_URL=your_convex_url
+CONVEX_DEPLOYMENT=your_convex_deployment
+
+# Better Auth
+BETTER_AUTH_SECRET=your_secret_key
+SITE_URL=http://localhost:3000
+
+# Mayar Payment Gateway
+MAYAR_API_KEY=your_mayar_api_key
+MAYAR_API_URL=https://api.mayar.id
+
+# LLM Providers
+OPENAI_API_KEY=your_openai_key
+ANTHROPIC_API_KEY=your_anthropic_key
+GOOGLE_API_KEY=your_google_key
+```
+
+3. **Generate Better Auth secret:**
 
 ```bash
-npm run test
+npx @better-auth/cli secret
 ```
 
-## Styling
-
-This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
-
-### Removing Tailwind CSS
-
-If you prefer not to use Tailwind CSS:
-
-1. Remove the demo pages in `src/routes/demo/`
-2. Replace the Tailwind import in `src/styles.css` with your own styles
-3. Remove `tailwindcss()` from the plugins array in `vite.config.ts`
-4. Uninstall the packages: `npm install @tailwindcss/vite tailwindcss -D`
-
-## Linting & Formatting
-
-
-This project uses [eslint](https://eslint.org/) and [prettier](https://prettier.io/) for linting and formatting. Eslint is configured using [tanstack/eslint-config](https://tanstack.com/config/latest/docs/eslint). The following scripts are available:
+4. **Start Convex development server:**
 
 ```bash
-npm run lint
-npm run format
-npm run check
+npx convex dev
 ```
 
-
-## Setting up Convex
-
-- Set the `VITE_CONVEX_URL` and `CONVEX_DEPLOYMENT` environment variables in your `.env.local`. (Or run `npx -y convex init` to set them automatically.)
-- Run `npx -y convex dev` to start the Convex server.
-
-
-## Setting up Better Auth
-
-1. Generate and set the `BETTER_AUTH_SECRET` environment variable in your `.env.local`:
-
-   ```bash
-   npx -y @better-auth/cli secret
-   ```
-
-2. Visit the [Better Auth documentation](https://www.better-auth.com) to unlock the full potential of authentication in your app.
-
-### Adding a Database (Optional)
-
-Better Auth can work in stateless mode, but to persist user data, add a database:
-
-```typescript
-// src/lib/auth.ts
-import { betterAuth } from "better-auth";
-import { Pool } from "pg";
-
-export const auth = betterAuth({
-  database: new Pool({
-    connectionString: process.env.DATABASE_URL,
-  }),
-  // ... rest of config
-});
-```
-
-Then run migrations:
+5. **Run the development server:**
 
 ```bash
-npx -y @better-auth/cli migrate
+pnpm dev
 ```
 
+Visit `http://localhost:3000` to see the application.
 
+## Architecture
 
-## Routing
+### Authentication Flow
 
-This project uses [TanStack Router](https://tanstack.com/router) with file-based routing. Routes are managed as files in `src/routes`.
+1. Users sign up/sign in via Better Auth (email/password or social OAuth)
+2. On sign-up, a Mayar customer is automatically created
+3. User sessions are managed via Convex + Better Auth
+4. API keys are generated with `rute_` prefix using Better Auth API Key plugin
 
-### Adding A Route
+### API Request Flow
 
-To add a new route to your application just add a new file in the `./src/routes` directory.
-
-TanStack will automatically generate the content of the route file for you.
-
-Now that you have two routes you can use a `Link` component to navigate between them.
-
-### Adding Links
-
-To use SPA (Single Page Application) navigation you will need to import the `Link` component from `@tanstack/react-router`.
-
-```tsx
-import { Link } from "@tanstack/react-router";
+```
+Client Request → TanStack Start API Route
+    ↓
+Verify API Key (Better Auth)
+    ↓
+Check Credit Balance (Convex)
+    ↓
+Route to LLM Provider (OpenAI/Anthropic/Gemini)
+    ↓
+Stream Response → Count Tokens
+    ↓
+Deduct Credits (Convex)
+    ↓
+Log Usage (Convex)
 ```
 
-Then anywhere in your JSX you can use it like so:
+### Credit System
 
-```tsx
-<Link to="/about">About</Link>
+- Pre-authorization: Credits deducted before LLM request based on `max_tokens`
+- Refund mechanism: Unused tokens refunded after response
+- Webhook handling: Mayar payment confirmations automatically update credit balance
+- Real-time updates: Dashboard shows live balance via Convex reactive queries
+
+### Rate Limiting
+
+Per-API-key rate limits configured via Better Auth API Key plugin:
+
+- **Free Tier**: 10 RPM, 100 requests/day, 10K tokens/day
+- **Basic Tier**: 60 RPM, 10K requests/day, 1M tokens/day
+- **Pro Tier**: 600 RPM, 100K requests/day, 10M tokens/day
+- **Enterprise**: Custom limits
+
+## API Usage
+
+### Authentication
+
+Include your API key in the Authorization header:
+
+```bash
+curl https://your-domain.com/api/v1/chat/completions \
+  -H "Authorization: Bearer rute_your_api_key" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "model": "gpt-4o",
+    "messages": [{"role": "user", "content": "Hello!"}]
+  }'
 ```
 
-This will create a link that will navigate to the `/about` route.
+### Available Models
 
-More information on the `Link` component can be found in the [Link documentation](https://tanstack.com/router/v1/docs/framework/react/api/router/linkComponent).
+List all available models:
 
-### Using A Layout
-
-In the File Based Routing setup the layout is located in `src/routes/__root.tsx`. Anything you add to the root route will appear in all the routes. The route content will appear in the JSX where you render `{children}` in the `shellComponent`.
-
-Here is an example layout that includes a header:
-
-```tsx
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
-
-export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: 'My App' },
-    ],
-  }),
-  shellComponent: ({ children }) => (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        <header>
-          <nav>
-            <Link to="/">Home</Link>
-            <Link to="/about">About</Link>
-          </nav>
-        </header>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  ),
-})
+```bash
+curl https://your-domain.com/api/v1/models \
+  -H "Authorization: Bearer rute_your_api_key"
 ```
 
-More information on layouts can be found in the [Layouts documentation](https://tanstack.com/router/latest/docs/framework/react/guide/routing-concepts#layouts).
+### Supported Providers
 
-## Server Functions
+- **OpenAI**: gpt-4o, gpt-4o-mini, gpt-4-turbo, etc.
+- **Anthropic**: claude-3-5-sonnet, claude-3-opus, etc.
+- **Google**: gemini-1.5-pro, gemini-1.5-flash, etc.
 
-TanStack Start provides server functions that allow you to write server-side code that seamlessly integrates with your client components.
+## Deployment
 
-```tsx
-import { createServerFn } from '@tanstack/react-start'
+### Convex Deployment
 
-const getServerTime = createServerFn({
-  method: 'GET',
-}).handler(async () => {
-  return new Date().toISOString()
-})
+1. Deploy Convex functions:
 
-// Use in a component
-function MyComponent() {
-  const [time, setTime] = useState('')
-  
-  useEffect(() => {
-    getServerTime().then(setTime)
-  }, [])
-  
-  return <div>Server time: {time}</div>
-}
+```bash
+npx convex deploy
 ```
 
-## API Routes
+2. Set production environment variables in Convex dashboard
 
-You can create API routes by using the `server` property in your route definitions:
+### Production Build
 
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-import { json } from '@tanstack/react-start'
-
-export const Route = createFileRoute('/api/hello')({
-  server: {
-    handlers: {
-      GET: () => json({ message: 'Hello, World!' }),
-    },
-  },
-})
+```bash
+pnpm build
 ```
 
-## Data Fetching
+### Mayar Webhook Configuration
 
-There are multiple ways to fetch data in your application. You can use TanStack Query to fetch data from a server. But you can also use the `loader` functionality built into TanStack Router to load the data for a route before it's rendered.
+Configure Mayar webhook URL to point to your Convex HTTP endpoint:
 
-For example:
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-
-export const Route = createFileRoute('/people')({
-  loader: async () => {
-    const response = await fetch('https://swapi.dev/api/people')
-    return response.json()
-  },
-  component: PeopleComponent,
-})
-
-function PeopleComponent() {
-  const data = Route.useLoaderData()
-  return (
-    <ul>
-      {data.results.map((person) => (
-        <li key={person.name}>{person.name}</li>
-      ))}
-    </ul>
-  )
-}
+```
+https://your-convex-deployment.convex.site/webhooks/mayar
 ```
 
-Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
+## Development
 
-# Demo files
+### Available Scripts
 
-Files prefixed with `demo` can be safely deleted. They are there to provide a starting point for you to play around with the features you've installed.
+```bash
+pnpm dev          # Start development server
+pnpm build        # Build for production
+pnpm test         # Run tests
+pnpm lint         # Run ESLint
+pnpm format       # Format with Prettier
+pnpm check        # Type check
+```
 
-# Learn More
+### Database Schema
 
-You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
+The Convex schema includes:
 
-For TanStack Start specific documentation, visit [TanStack Start](https://tanstack.com/start).
+- **customers**: User profiles with Mayar customer ID and credit balance
+- **creditTransactions**: Credit top-up and usage transactions
+- **models**: LLM model configurations and pricing
+- **usageLogs**: Detailed API usage logs
+- **webhookLogs**: Mayar webhook event logs
+
+### Adding New LLM Providers
+
+1. Add provider configuration to `convex/models.ts`
+2. Implement provider client in `convex/proxy.ts`
+3. Add request/response transformation if needed
+4. Update pricing in model configuration
+
+## Security Considerations
+
+- API keys are hashed using Better Auth's built-in hashing
+- Webhook signatures are verified using Mayar secrets
+- Rate limiting prevents abuse
+- CORS configured for API routes
+- Environment variables for sensitive data
+
+## Contributing
+
+This project uses Conventional Commits for commit messages:
+
+- `feat:` New features
+- `fix:` Bug fixes
+- `docs:` Documentation updates
+- `chore:` Maintenance tasks
+- `refactor:` Code refactoring
+
+## License
+
+MIT License - see LICENSE file for details
+
+## Support
+
+For issues and feature requests, please use the GitHub issue tracker.
+
+## Acknowledgments
+
+- [TanStack Start](https://tanstack.com/start) - Full-stack React framework
+- [Convex](https://convex.dev) - Backend platform
+- [Better Auth](https://better-auth.com) - Authentication library
+- [Mayar](https://mayar.id) - Indonesian payment gateway
