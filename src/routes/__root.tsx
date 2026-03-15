@@ -50,6 +50,13 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
         href: appCss,
       },
     ],
+    scripts: [
+      {
+        defer: true,
+        src: 'https://umami.b8n.xyz/script.js',
+        'data-website-id': '4e1ff0d5-15bc-4cb6-ae7f-9b271ab4612a',
+      },
+    ],
   }),
   beforeLoad: async (ctx) => {
     const token = await getAuth()
