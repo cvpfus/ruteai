@@ -14,7 +14,6 @@ import { authClient } from '../lib/auth-client'
 import { redirect } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/transactions')({
-  ssr: false,
   beforeLoad: ({ context }) => {
     if (!context.isAuthenticated) {
       throw redirect({ to: '/sign-in' })
@@ -160,7 +159,7 @@ function Transactions() {
               </p>
               <a
                 href="/top-up"
-                className="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-[var(--accent-gold)] text-[var(--bg-sidebar)] text-sm font-semibold rounded-lg hover:bg-[var(--accent-gold-hover)] transition-colors"
+                className="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-[var(--accent-gold)] !text-[#0A0A0A] text-sm font-semibold rounded-lg hover:bg-[var(--accent-gold-hover)] transition-colors"
               >
                 <CreditCard size={16} />
                 Top Up Credits

@@ -18,7 +18,6 @@ import { authClient } from '../lib/auth-client'
 import { redirect, useSearch } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/top-up')({
-  ssr: false,
   validateSearch: (search: Record<string, unknown>) => ({
     status: (search.status as string) || undefined,
   }),
@@ -180,7 +179,7 @@ function TopUp() {
             }}
             className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
               !useCustom
-                ? 'bg-[var(--accent-gold)] text-[var(--bg-sidebar)]'
+                ? 'bg-[var(--accent-gold)] !text-[#0A0A0A]'
                 : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
             }`}
           >
@@ -195,7 +194,7 @@ function TopUp() {
             }}
             className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
               useCustom
-                ? 'bg-[var(--accent-gold)] text-[var(--bg-sidebar)]'
+                ? 'bg-[var(--accent-gold)] !text-[#0A0A0A]'
                 : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
             }`}
           >
@@ -226,7 +225,7 @@ function TopUp() {
                   }`}
                 >
                   {pkg.popular && (
-                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-[var(--accent-gold)] text-[var(--bg-sidebar)] text-xs font-semibold rounded-full flex items-center gap-1">
+                    <span className="absolute -top-3 left-1/2 -translate-x-1/2 px-3 py-1 bg-[var(--accent-gold)] !text-[#0A0A0A] text-xs font-semibold rounded-full flex items-center gap-1">
                       <Sparkles size={12} />
                       Best Value
                     </span>
@@ -397,7 +396,7 @@ function TopUp() {
             <button
               onClick={handleGenerateCheckout}
               disabled={isGenerating || effectiveAmount < 50000}
-              className="w-full h-12 bg-[var(--accent-gold)] hover:bg-[var(--accent-gold-hover)] text-[var(--bg-sidebar)] font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              className="w-full h-12 bg-[var(--accent-gold)] hover:bg-[var(--accent-gold-hover)] !text-[#0A0A0A] font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
             >
               {isGenerating ? (
                 <>
@@ -416,7 +415,7 @@ function TopUp() {
               href={checkoutUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full h-12 bg-[var(--accent-gold)] hover:bg-[var(--accent-gold-hover)] text-[var(--bg-sidebar)] font-semibold rounded-lg transition-colors flex items-center justify-center gap-2"
+              className="w-full h-12 bg-[var(--accent-gold)] hover:bg-[var(--accent-gold-hover)] !text-[#0A0A0A] font-semibold rounded-lg transition-colors flex items-center justify-center gap-2"
             >
               <ExternalLink size={18} />
               Proceed to Payment

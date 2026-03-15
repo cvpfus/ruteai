@@ -10,6 +10,8 @@ import {
 
 import { authClient } from '../lib/auth-client'
 import { redirect } from '@tanstack/react-router'
+import { useQuery } from 'convex/react'
+import { api } from '../../convex/_generated/api'
 
 export const Route = createFileRoute('/dashboard')({
   ssr: false,
@@ -21,83 +23,69 @@ export const Route = createFileRoute('/dashboard')({
   component: Dashboard,
 })
 
-// Mock data
-const stats = [
-  {
-    label: 'Total Requests',
-    value: '45,231',
-    change: '+12.5%',
-    positive: true,
-    icon: Activity,
-  },
-  {
-    label: 'Total Tokens',
-    value: '2.4M',
-    change: '+8.2%',
-    positive: true,
-    icon: Zap,
-  },
-  {
-    label: 'Avg Response Time',
-    value: '245ms',
-    change: '-5.3%',
-    positive: true,
-    icon: Activity,
-  },
-  {
-    label: 'Credits Balance',
-    value: 'Rp 2.5M',
-    change: '-2.1%',
-    positive: false,
-    icon: CreditCard,
-  },
-]
+function formatCurrency(amount: number) {
+  return new Intl.NumberFormat('id-ID', {
+    style: 'currency',
+    currency: 'IDR',
+    minimumFractionDigits: 0,
+  }).format(amount)
+}
 
-const recentRequests = [
-  {
-    id: 'req_123',
-    method: 'POST',
-    endpoint: '/v1/chat/completions',
-    status: 200,
-    time: '2s ago',
-    tokens: 1_240,
-  },
-  {
-    id: 'req_124',
-    method: 'GET',
-    endpoint: '/v1/models',
-    status: 200,
-    time: '5s ago',
-    tokens: 0,
-  },
-  {
-    id: 'req_125',
-    method: 'POST',
-    endpoint: '/v1/completions',
-    status: 200,
-    time: '12s ago',
-    tokens: 856,
-  },
-  {
-    id: 'req_126',
-    method: 'POST',
-    endpoint: '/v1/chat/completions',
-    status: 429,
-    time: '18s ago',
-    tokens: 0,
-  },
-  {
-    id: 'req_127',
-    method: 'GET',
-    endpoint: '/v1/usage',
-    status: 200,
-    time: '34s ago',
-    tokens: 0,
-  },
-]
+function formatNumber(num: number) {
+  if (num >= 1000000) return (num / 1000000).toFixed(1) + 'M'
+  if (num >= 1000) return (num / 1000).toFixed(1) + 'K'
+  return num.toString()
+}
 
- function Dashboard() {
+function formatRelativeDate(timestamp: number) {
+  const diff = Date.now() - timestamp
+  const seconds = Math.floor(diff / 1000)
+  if (seconds < 60) return `${seconds}s ago`
+  const minutes = Math.floor(seconds / 60)
+  if (minutes < 60) return `${minutes}m ago`
+  const hours = Math.floor(minutes / 60)
+  if (hours < 24) return `${hours}h ago`
+  const days = Math.floor(hours / 24)
+  return `${days}d ago`
+}
+
+function Dashboard() {
   const { data: session } = authClient.useSession()
+  const statsData = useQuery(api.usageLogs.getDashboardStats)
+
+  // Mapping DB response back to local structured UI
+  const stats = [
+    {
+      label: 'Total Requests',
+      value: statsData ? formatNumber(statsData.totalRequests) : '-',
+      change: '',
+      positive: true,
+      icon: Activity,
+    },
+    {
+      label: 'Total Tokens',
+      value: statsData ? formatNumber(statsData.totalTokens) : '-',
+      change: '',
+      positive: true,
+      icon: Zap,
+    },
+    {
+      label: 'Avg Response Time',
+      value: statsData ? `${statsData.avgResponseTime}ms` : '-',
+      change: '',
+      positive: true,
+      icon: Activity,
+    },
+    {
+      label: 'Credits Balance',
+      value: statsData ? formatCurrency(statsData.balance) : '-',
+      change: '',
+      positive: true,
+      icon: CreditCard,
+    },
+  ]
+
+  const recentRequests = statsData?.recentRequests || []
 
   return (
     <DashboardLayout
@@ -120,16 +108,18 @@ const recentRequests = [
                   <div className="p-2 bg-[var(--bg-input)] rounded-lg">
                     <Icon size={20} className="text-[var(--accent-gold)]" />
                   </div>
-                  <div
-                    className={`flex items-center gap-1 text-sm ${stat.positive ? 'text-[var(--success)]' : 'text-[var(--error)]'}`}
-                  >
-                    {stat.positive ? (
-                      <ArrowUpRight size={16} />
-                    ) : (
-                      <ArrowDownRight size={16} />
-                    )}
-                    <span>{stat.change}</span>
-                  </div>
+                  {stat.change && (
+                    <div
+                      className={`flex items-center gap-1 text-sm ${stat.positive ? 'text-[var(--success)]' : 'text-[var(--error)]'}`}
+                    >
+                      {stat.positive ? (
+                        <ArrowUpRight size={16} />
+                      ) : (
+                        <ArrowDownRight size={16} />
+                      )}
+                      <span>{stat.change}</span>
+                    </div>
+                  )}
                 </div>
                 <div className="stat-value">{stat.value}</div>
                 <div className="stat-label mt-1">{stat.label}</div>
@@ -165,7 +155,7 @@ const recentRequests = [
               </thead>
               <tbody>
                 {recentRequests.map((req) => (
-                  <tr key={req.id}>
+                  <tr key={req._id}>
                     <td>
                       <span
                         className={`badge-method badge-${req.method.toLowerCase()}`}
@@ -181,10 +171,17 @@ const recentRequests = [
                         {req.status}
                       </span>
                     </td>
-                    <td>{req.time}</td>
+                    <td>{formatRelativeDate(req.time)}</td>
                     <td>{req.tokens.toLocaleString()}</td>
                   </tr>
                 ))}
+                {recentRequests.length === 0 && (
+                  <tr>
+                    <td colSpan={5} className="text-center py-6 text-[var(--text-tertiary)]">
+                      No recent activity.
+                    </td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
@@ -200,7 +197,7 @@ const recentRequests = [
               <div className="w-12 h-12 rounded-lg bg-[var(--bg-input)] flex items-center justify-center group-hover:bg-[var(--accent-gold)] transition-colors">
                 <Activity
                   size={24}
-                  className="text-[var(--accent-gold)] group-hover:text-[var(--bg-sidebar)]"
+                  className="text-[var(--accent-gold)] group-hover:!text-[#0A0A0A]"
                 />
               </div>
               <div>
@@ -222,7 +219,7 @@ const recentRequests = [
               <div className="w-12 h-12 rounded-lg bg-[var(--bg-input)] flex items-center justify-center group-hover:bg-[var(--accent-gold)] transition-colors">
                 <CreditCard
                   size={24}
-                  className="text-[var(--accent-gold)] group-hover:text-[var(--bg-sidebar)]"
+                  className="text-[var(--accent-gold)] group-hover:!text-[#0A0A0A]"
                 />
               </div>
               <div>
@@ -244,7 +241,7 @@ const recentRequests = [
               <div className="w-12 h-12 rounded-lg bg-[var(--bg-input)] flex items-center justify-center group-hover:bg-[var(--accent-gold)] transition-colors">
                 <Zap
                   size={24}
-                  className="text-[var(--accent-gold)] group-hover:text-[var(--bg-sidebar)]"
+                  className="text-[var(--accent-gold)] group-hover:!text-[#0A0A0A]"
                 />
               </div>
               <div>
