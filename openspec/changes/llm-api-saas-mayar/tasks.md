@@ -2,27 +2,27 @@
 
 ## 1. Project Setup
 
-- [ ] 1.1 Initialize TanStack Start project with pnpm
-- [ ] 1.2 Configure TypeScript with strict mode
-- [ ] 1.3 Set up Convex project and install dependencies
-- [ ] 1.4 Install Better Auth and Convex integration (`better-auth`, `@convex-dev/better-auth`, `@better-auth/api-key`)
-- [ ] 1.5 Configure Tailwind CSS for styling
-- [ ] 1.6 Set up environment variables (.env.example) including `BETTER_AUTH_SECRET`, `SITE_URL`
-- [ ] 1.7 Configure ESLint and Prettier
-- [ ] 1.8 Set up Git repository with conventional commits
+- [x] 1.1 Initialize TanStack Start project with pnpm
+- [x] 1.2 Configure TypeScript with strict mode
+- [x] 1.3 Set up Convex project and install dependencies
+- [x] 1.4 Install Better Auth and Convex integration (`better-auth`, `@convex-dev/better-auth`, `@better-auth/api-key`)
+- [x] 1.5 Configure Tailwind CSS for styling
+- [x] 1.6 Set up environment variables (.env.example) including `BETTER_AUTH_SECRET`, `SITE_URL`
+- [x] 1.7 Configure ESLint and Prettier
+- [x] 1.8 Set up Git repository with conventional commits
 
 ## 2. Better Auth Setup
 
-- [ ] 2.1 Create Better Auth Convex component definition (`convex/betterAuth/convex.config.ts`)
-- [ ] 2.2 Register Better Auth component in `convex/convex.config.ts`
-- [ ] 2.3 Create Better Auth instance with Convex adapter (`convex/betterAuth/auth.ts`) with email/password and `@better-auth/api-key` plugin
-- [ ] 2.4 Generate Better Auth schema (`convex/betterAuth/schema.ts`) via `npx auth generate`
-- [ ] 2.5 Export adapter functions (`convex/betterAuth/adapter.ts`)
-- [ ] 2.6 Add Convex auth config (`convex/auth.config.ts`) with `getAuthConfigProvider`
-- [ ] 2.7 Mount auth routes in `convex/http.ts` via `authComponent.registerRoutes`
-- [ ] 2.8 Create Better Auth client (`lib/auth-client.ts`) with `convexClient()` and `apiKeyClient()` plugins
-- [ ] 2.9 Create `ConvexBetterAuthProvider` wrapper component
-- [ ] 2.10 Set up environment variables in Convex deployment (`BETTER_AUTH_SECRET`, `SITE_URL`)
+- [x] 2.1 Create Better Auth Convex component definition (`convex/betterAuth/convex.config.ts`)
+- [x] 2.2 Register Better Auth component in `convex/convex.config.ts`
+- [x] 2.3 Create Better Auth instance with Convex adapter (`convex/betterAuth/auth.ts`) with email/password and `@better-auth/api-key` plugin
+- [x] 2.4 Generate Better Auth schema (`convex/betterAuth/schema.ts`) via `npx auth generate`
+- [x] 2.5 Export adapter functions (`convex/betterAuth/adapter.ts`)
+- [x] 2.6 Add Convex auth config (`convex/auth.config.ts`) with `getAuthConfigProvider`
+- [x] 2.7 Mount auth routes in `convex/http.ts` via `authComponent.registerRoutes`
+- [x] 2.8 Create Better Auth client (`lib/auth-client.ts`) with `convexClient()` and `apiKeyClient()` plugins
+- [x] 2.9 Create `ConvexBetterAuthProvider` wrapper component
+- [x] 2.10 Set up environment variables in Convex deployment (`BETTER_AUTH_SECRET`, `SITE_URL`)
 
 ## 3. Convex Database Schema
 
