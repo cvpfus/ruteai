@@ -4,7 +4,7 @@ import type { GenericCtx } from '@convex-dev/better-auth'
 import type { BetterAuthOptions } from 'better-auth'
 import { betterAuth } from 'better-auth'
 import { apiKey } from '@better-auth/api-key'
-import { components } from '../_generated/api'
+import { components, internal } from '../_generated/api'
 import type { DataModel } from '../_generated/dataModel'
 import authConfig from '../auth.config'
 import schema from './schema'
@@ -37,6 +37,36 @@ export const createAuthOptions = (ctx: GenericCtx<DataModel>) => {
         defaultPrefix: 'rute_',
       }),
     ],
+    socialProviders: {
+      google: {
+        clientId: process.env.GOOGLE_CLIENT_ID!,
+        clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+      },
+    },
+    databaseHooks: {
+      user: {
+        create: {
+          after: async (user) => {
+            // Fire-and-forget: schedule Mayar customer registration
+            // We use ctx.scheduler so it runs outside the auth transaction
+            try {
+              await (ctx as any).scheduler.runAfter(
+                0,
+                internal.mayar.registerCustomerAfterSignup,
+                {
+                  userId: user.id,
+                  name: user.name,
+                  email: user.email,
+                },
+              )
+            } catch (err) {
+              // Do not block user creation if scheduling fails
+              console.error('[auth] Failed to schedule Mayar registration:', err)
+            }
+          },
+        },
+      },
+    },
   } satisfies BetterAuthOptions
 }
 
