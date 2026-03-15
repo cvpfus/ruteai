@@ -8,11 +8,13 @@
  * @module
  */
 
+import type * as apiKeys from "../apiKeys.js";
 import type * as auth from "../auth.js";
 import type * as customers from "../customers.js";
 import type * as http from "../http.js";
 import type * as mayar from "../mayar.js";
 import type * as todos from "../todos.js";
+import type * as webhooks from "../webhooks.js";
 
 import type {
   ApiFromModules,
@@ -21,11 +23,13 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  apiKeys: typeof apiKeys;
   auth: typeof auth;
   customers: typeof customers;
   http: typeof http;
   mayar: typeof mayar;
   todos: typeof todos;
+  webhooks: typeof webhooks;
 }>;
 
 /**
