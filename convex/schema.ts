@@ -7,10 +7,12 @@ export default defineSchema({
   
   customers: defineTable({
     userId: v.string(), 
+    email: v.optional(v.string()),
     mayarCustomerId: v.optional(v.string()), 
     creditBalance: v.number(), 
   })
     .index('by_userId', ['userId'])
+    .index('by_email', ['email'])
     .index('by_mayarCustomerId', ['mayarCustomerId']),
 
   creditTransactions: defineTable({
