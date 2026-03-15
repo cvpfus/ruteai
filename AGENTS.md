@@ -14,6 +14,11 @@ See [docs](https://tanstack.com/start/latest/docs/framework/react/overview) for 
 Better Auth is a simple and powerful authentication system that provides a full-stack solution for user authentication and authorization.
 See [docs](https://better-auth.com/llms.txt) for more information on how to use Better Auth.
 
+# Integrate Better Auth with Convex
+See [docs](https://better-auth.com/llms.txt/docs/integrations/convex.md) for more information on how to integrate Better Auth with Convex.
+
+# Integrate Better Auth with Tanstack Start
+See [docs](https://better-auth.com/llms.txt/docs/integrations/tanstack.md) for more information on how to integrate Better Auth with Tanstack Start.
 
 # Git Commit Messages
 We use the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) format for commit messages. When committing, please commit them in logical groups.
