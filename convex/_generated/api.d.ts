@@ -13,7 +13,10 @@ import type * as auth from "../auth.js";
 import type * as customers from "../customers.js";
 import type * as http from "../http.js";
 import type * as mayar from "../mayar.js";
+import type * as models from "../models.js";
+import type * as proxy from "../proxy.js";
 import type * as todos from "../todos.js";
+import type * as usageLogs from "../usageLogs.js";
 import type * as webhooks from "../webhooks.js";
 
 import type {
@@ -28,7 +31,10 @@ declare const fullApi: ApiFromModules<{
   customers: typeof customers;
   http: typeof http;
   mayar: typeof mayar;
+  models: typeof models;
+  proxy: typeof proxy;
   todos: typeof todos;
+  usageLogs: typeof usageLogs;
   webhooks: typeof webhooks;
 }>;
 
@@ -127,6 +133,7 @@ export declare const components: {
               }
             | {
                 data: {
+                  configId?: null | string;
                   createdAt: number;
                   enabled: boolean;
                   expiresAt?: null | number;
@@ -140,13 +147,14 @@ export declare const components: {
                   rateLimitEnabled?: null | boolean;
                   rateLimitMax?: null | number;
                   rateLimitTimeWindow?: null | number;
+                  referenceId?: null | string;
                   refillAmount?: null | number;
                   refillInterval?: null | number;
                   remaining?: null | number;
                   requestCount: number;
                   start?: null | string;
                   updatedAt: number;
-                  userId: string;
+                  userId?: null | string;
                 };
                 model: "apikey";
               };
@@ -354,6 +362,8 @@ export declare const components: {
                     | "metadata"
                     | "createdAt"
                     | "updatedAt"
+                    | "configId"
+                    | "referenceId"
                     | "_id";
                   operator?:
                     | "lt"
@@ -587,6 +597,8 @@ export declare const components: {
                     | "metadata"
                     | "createdAt"
                     | "updatedAt"
+                    | "configId"
+                    | "referenceId"
                     | "_id";
                   operator?:
                     | "lt"
@@ -923,6 +935,7 @@ export declare const components: {
             | {
                 model: "apikey";
                 update: {
+                  configId?: null | string;
                   createdAt?: number;
                   enabled?: boolean;
                   expiresAt?: null | number;
@@ -936,13 +949,14 @@ export declare const components: {
                   rateLimitEnabled?: null | boolean;
                   rateLimitMax?: null | number;
                   rateLimitTimeWindow?: null | number;
+                  referenceId?: null | string;
                   refillAmount?: null | number;
                   refillInterval?: null | number;
                   remaining?: null | number;
                   requestCount?: number;
                   start?: null | string;
                   updatedAt?: number;
-                  userId?: string;
+                  userId?: null | string;
                 };
                 where?: Array<{
                   connector?: "AND" | "OR";
@@ -967,6 +981,8 @@ export declare const components: {
                     | "metadata"
                     | "createdAt"
                     | "updatedAt"
+                    | "configId"
+                    | "referenceId"
                     | "_id";
                   operator?:
                     | "lt"
@@ -1222,6 +1238,7 @@ export declare const components: {
             | {
                 model: "apikey";
                 update: {
+                  configId?: null | string;
                   createdAt?: number;
                   enabled?: boolean;
                   expiresAt?: null | number;
@@ -1235,13 +1252,14 @@ export declare const components: {
                   rateLimitEnabled?: null | boolean;
                   rateLimitMax?: null | number;
                   rateLimitTimeWindow?: null | number;
+                  referenceId?: null | string;
                   refillAmount?: null | number;
                   refillInterval?: null | number;
                   remaining?: null | number;
                   requestCount?: number;
                   start?: null | string;
                   updatedAt?: number;
-                  userId?: string;
+                  userId?: null | string;
                 };
                 where?: Array<{
                   connector?: "AND" | "OR";
@@ -1266,6 +1284,8 @@ export declare const components: {
                     | "metadata"
                     | "createdAt"
                     | "updatedAt"
+                    | "configId"
+                    | "referenceId"
                     | "_id";
                   operator?:
                     | "lt"

@@ -90,6 +90,7 @@ export type ComponentApi<Name extends string | undefined = string | undefined> =
               }
             | {
                 data: {
+                  configId?: null | string;
                   createdAt: number;
                   enabled: boolean;
                   expiresAt?: null | number;
@@ -103,13 +104,14 @@ export type ComponentApi<Name extends string | undefined = string | undefined> =
                   rateLimitEnabled?: null | boolean;
                   rateLimitMax?: null | number;
                   rateLimitTimeWindow?: null | number;
+                  referenceId?: null | string;
                   refillAmount?: null | number;
                   refillInterval?: null | number;
                   remaining?: null | number;
                   requestCount: number;
                   start?: null | string;
                   updatedAt: number;
-                  userId: string;
+                  userId?: null | string;
                 };
                 model: "apikey";
               };
@@ -318,6 +320,8 @@ export type ComponentApi<Name extends string | undefined = string | undefined> =
                     | "metadata"
                     | "createdAt"
                     | "updatedAt"
+                    | "configId"
+                    | "referenceId"
                     | "_id";
                   operator?:
                     | "lt"
@@ -552,6 +556,8 @@ export type ComponentApi<Name extends string | undefined = string | undefined> =
                     | "metadata"
                     | "createdAt"
                     | "updatedAt"
+                    | "configId"
+                    | "referenceId"
                     | "_id";
                   operator?:
                     | "lt"
@@ -891,6 +897,7 @@ export type ComponentApi<Name extends string | undefined = string | undefined> =
             | {
                 model: "apikey";
                 update: {
+                  configId?: null | string;
                   createdAt?: number;
                   enabled?: boolean;
                   expiresAt?: null | number;
@@ -904,13 +911,14 @@ export type ComponentApi<Name extends string | undefined = string | undefined> =
                   rateLimitEnabled?: null | boolean;
                   rateLimitMax?: null | number;
                   rateLimitTimeWindow?: null | number;
+                  referenceId?: null | string;
                   refillAmount?: null | number;
                   refillInterval?: null | number;
                   remaining?: null | number;
                   requestCount?: number;
                   start?: null | string;
                   updatedAt?: number;
-                  userId?: string;
+                  userId?: null | string;
                 };
                 where?: Array<{
                   connector?: "AND" | "OR";
@@ -935,6 +943,8 @@ export type ComponentApi<Name extends string | undefined = string | undefined> =
                     | "metadata"
                     | "createdAt"
                     | "updatedAt"
+                    | "configId"
+                    | "referenceId"
                     | "_id";
                   operator?:
                     | "lt"
@@ -1191,6 +1201,7 @@ export type ComponentApi<Name extends string | undefined = string | undefined> =
             | {
                 model: "apikey";
                 update: {
+                  configId?: null | string;
                   createdAt?: number;
                   enabled?: boolean;
                   expiresAt?: null | number;
@@ -1204,13 +1215,14 @@ export type ComponentApi<Name extends string | undefined = string | undefined> =
                   rateLimitEnabled?: null | boolean;
                   rateLimitMax?: null | number;
                   rateLimitTimeWindow?: null | number;
+                  referenceId?: null | string;
                   refillAmount?: null | number;
                   refillInterval?: null | number;
                   remaining?: null | number;
                   requestCount?: number;
                   start?: null | string;
                   updatedAt?: number;
-                  userId?: string;
+                  userId?: null | string;
                 };
                 where?: Array<{
                   connector?: "AND" | "OR";
@@ -1235,6 +1247,8 @@ export type ComponentApi<Name extends string | undefined = string | undefined> =
                     | "metadata"
                     | "createdAt"
                     | "updatedAt"
+                    | "configId"
+                    | "referenceId"
                     | "_id";
                   operator?:
                     | "lt"
