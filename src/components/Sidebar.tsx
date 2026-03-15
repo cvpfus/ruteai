@@ -8,6 +8,7 @@ import {
   Settings,
   LogOut,
   User,
+  Brain,
 } from 'lucide-react'
 import { authClient } from '../lib/auth-client'
 
@@ -21,6 +22,7 @@ interface SidebarProps {
 
 const navItems = [
   { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { path: '/models', label: 'Models', icon: Brain },
   { path: '/api-keys', label: 'API Keys', icon: Key },
   { path: '/usage', label: 'Usage', icon: BarChart3 },
   { path: '/transactions', label: 'Transactions', icon: History },

@@ -14,6 +14,7 @@ import { Route as TransactionsRouteImport } from './routes/transactions'
 import { Route as TopUpRouteImport } from './routes/top-up'
 import { Route as SignUpRouteImport } from './routes/sign-up'
 import { Route as SignInRouteImport } from './routes/sign-in'
+import { Route as ModelsRouteImport } from './routes/models'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as ApiKeysRouteImport } from './routes/api-keys'
 import { Route as AboutRouteImport } from './routes/about'
@@ -50,6 +51,11 @@ const SignUpRoute = SignUpRouteImport.update({
 const SignInRoute = SignInRouteImport.update({
   id: '/sign-in',
   path: '/sign-in',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ModelsRoute = ModelsRouteImport.update({
+  id: '/models',
+  path: '/models',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DashboardRoute = DashboardRouteImport.update({
@@ -118,6 +124,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/api-keys': typeof ApiKeysRoute
   '/dashboard': typeof DashboardRoute
+  '/models': typeof ModelsRoute
   '/sign-in': typeof SignInRoute
   '/sign-up': typeof SignUpRoute
   '/top-up': typeof TopUpRoute
@@ -137,6 +144,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/api-keys': typeof ApiKeysRoute
   '/dashboard': typeof DashboardRoute
+  '/models': typeof ModelsRoute
   '/sign-in': typeof SignInRoute
   '/sign-up': typeof SignUpRoute
   '/top-up': typeof TopUpRoute
@@ -157,6 +165,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/api-keys': typeof ApiKeysRoute
   '/dashboard': typeof DashboardRoute
+  '/models': typeof ModelsRoute
   '/sign-in': typeof SignInRoute
   '/sign-up': typeof SignUpRoute
   '/top-up': typeof TopUpRoute
@@ -178,6 +187,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/api-keys'
     | '/dashboard'
+    | '/models'
     | '/sign-in'
     | '/sign-up'
     | '/top-up'
@@ -197,6 +207,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/api-keys'
     | '/dashboard'
+    | '/models'
     | '/sign-in'
     | '/sign-up'
     | '/top-up'
@@ -216,6 +227,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/api-keys'
     | '/dashboard'
+    | '/models'
     | '/sign-in'
     | '/sign-up'
     | '/top-up'
@@ -236,6 +248,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ApiKeysRoute: typeof ApiKeysRoute
   DashboardRoute: typeof DashboardRoute
+  ModelsRoute: typeof ModelsRoute
   SignInRoute: typeof SignInRoute
   SignUpRoute: typeof SignUpRoute
   TopUpRoute: typeof TopUpRoute
@@ -286,6 +299,13 @@ declare module '@tanstack/react-router' {
       path: '/sign-in'
       fullPath: '/sign-in'
       preLoaderRoute: typeof SignInRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/models': {
+      id: '/models'
+      path: '/models'
+      fullPath: '/models'
+      preLoaderRoute: typeof ModelsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/dashboard': {
@@ -380,6 +400,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ApiKeysRoute: ApiKeysRoute,
   DashboardRoute: DashboardRoute,
+  ModelsRoute: ModelsRoute,
   SignInRoute: SignInRoute,
   SignUpRoute: SignUpRoute,
   TopUpRoute: TopUpRoute,

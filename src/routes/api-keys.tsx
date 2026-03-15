@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 import { DashboardLayout } from '../components/DashboardLayout'
-import { Plus, Copy, Trash2, X, ShieldAlert, AlertCircle, Loader2 } from 'lucide-react'
+import { Plus, Copy, Trash2, X, ShieldAlert, AlertCircle, Loader2, AlertTriangle } from 'lucide-react'
 
 import { authClient } from '../lib/auth-client'
 import { redirect } from '@tanstack/react-router'
@@ -22,6 +22,105 @@ type ApiKeyItem = {
   start?: string | null
   enabled: boolean
   createdAt: number
+}
+
+function CreateKeyModal({
+  isOpen,
+  onClose,
+  onCreate,
+  isCreating,
+}: {
+  isOpen: boolean
+  onClose: () => void
+  onCreate: (name: string) => void
+  isCreating: boolean
+}) {
+  const [name, setName] = useState('')
+
+  if (!isOpen) return null
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!name.trim()) return
+    onCreate(name.trim())
+  }
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+      <div className="w-full max-w-md mx-4 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl p-6 shadow-2xl">
+        <div className="flex items-start justify-between mb-6">
+          <div className="flex items-center gap-3">
+            <div className="p-2 rounded-lg bg-[var(--accent-gold)]/10">
+              <Plus size={20} className="text-[var(--accent-gold)]" />
+            </div>
+            <div>
+              <h3 className="font-semibold text-[var(--text-primary)]">
+                Create New API Key
+              </h3>
+              <p className="text-xs text-[var(--text-secondary)] mt-0.5">
+                Give your key a descriptive name to identify it.
+              </p>
+            </div>
+          </div>
+          <button
+            onClick={onClose}
+            className="p-1.5 rounded-lg text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-hover)] transition-colors"
+          >
+            <X size={18} />
+          </button>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label
+              htmlFor="keyName"
+              className="block text-sm font-medium text-[var(--text-primary)] mb-2"
+            >
+              Key Name
+            </label>
+            <input
+              id="keyName"
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="e.g., Production API Key"
+              className="w-full px-4 py-3 bg-[var(--bg-input)] border border-[var(--border-color)] rounded-lg text-[var(--text-primary)] placeholder-[var(--text-tertiary)] focus:outline-none focus:border-[var(--accent-gold)] focus:ring-2 focus:ring-[var(--accent-gold)]/20 disabled:opacity-50 transition-all"
+              autoFocus
+              disabled={isCreating}
+            />
+          </div>
+
+          <div className="flex gap-3">
+            <button
+              type="button"
+              onClick={onClose}
+              disabled={isCreating}
+              className="px-5 py-2.5 border border-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-hover)] rounded-lg transition-colors disabled:opacity-50"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              disabled={!name.trim() || isCreating}
+              className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-[var(--accent-gold)] hover:bg-[var(--accent-gold-hover)] !text-[#0A0A0A] font-medium rounded-lg transition-colors disabled:opacity-50"
+            >
+              {isCreating ? (
+                <>
+                  <Loader2 size={16} className="animate-spin" />
+                  Creating...
+                </>
+              ) : (
+                <>
+                  <Plus size={16} />
+                  Create Key
+                </>
+              )}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  )
 }
 
 function NewKeyModal({
@@ -90,6 +189,74 @@ function NewKeyModal({
   )
 }
 
+function DeleteConfirmModal({
+  isOpen,
+  keyName,
+  onClose,
+  onConfirm,
+  isDeleting,
+}: {
+  isOpen: boolean
+  keyName: string | null
+  onClose: () => void
+  onConfirm: () => void
+  isDeleting: boolean
+}) {
+  if (!isOpen) return null
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
+      <div className="w-full max-w-md mx-4 bg-[var(--bg-card)] border border-[var(--border-color)] rounded-2xl p-6 shadow-2xl">
+        <div className="flex items-start gap-4 mb-6">
+          <div className="p-2 rounded-lg bg-[var(--error)]/10 flex-shrink-0">
+            <AlertTriangle size={24} className="text-[var(--error)]" />
+          </div>
+          <div>
+            <h3 className="font-semibold text-[var(--text-primary)] mb-1">
+              Revoke API Key
+            </h3>
+            <p className="text-sm text-[var(--text-secondary)]">
+              Are you sure you want to revoke{' '}
+              <span className="text-[var(--text-primary)] font-medium">
+                {keyName || 'this API key'}
+              </span>
+              ? This action cannot be undone and any applications using this key
+              will immediately stop working.
+            </p>
+          </div>
+        </div>
+
+        <div className="flex gap-3">
+          <button
+            onClick={onClose}
+            disabled={isDeleting}
+            className="flex-1 px-5 py-2.5 border border-[var(--border-color)] text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-hover)] rounded-lg transition-colors disabled:opacity-50"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={onConfirm}
+            disabled={isDeleting}
+            className="flex-1 flex items-center justify-center gap-2 py-2.5 bg-[var(--error)] hover:bg-[var(--error)]/80 text-white font-medium rounded-lg transition-colors disabled:opacity-50"
+          >
+            {isDeleting ? (
+              <>
+                <Loader2 size={16} className="animate-spin" />
+                Revoking...
+              </>
+            ) : (
+              <>
+                <Trash2 size={16} />
+                Revoke Key
+              </>
+            )}
+          </button>
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function APIKeys() {
   const { data: session } = authClient.useSession()
   const queryClient = useQueryClient()
@@ -113,6 +280,9 @@ function APIKeys() {
   const [isCreating, setIsCreating] = useState(false)
   const [newKeySecret, setNewKeySecret] = useState<string | null>(null)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false)
+  const [keyToDelete, setKeyToDelete] = useState<ApiKeyItem | null>(null)
+  const [isDeleting, setIsDeleting] = useState(false)
 
   const copyStart = async (id: string, value: string) => {
     await navigator.clipboard.writeText(value)
@@ -120,32 +290,36 @@ function APIKeys() {
     setTimeout(() => setCopiedId(null), 2000)
   }
 
-  const handleDeleteKey = async (id: string) => {
-    if (!confirm('Are you sure you want to revoke this API key?')) return
-    const { error } = await authClient.apiKey.delete({ keyId: id })
+  const handleDeleteConfirm = async () => {
+    if (!keyToDelete) return
+    setIsDeleting(true)
+    const { error } = await authClient.apiKey.delete({ keyId: keyToDelete.id })
     if (error) {
       setErrorMessage('Failed to revoke API key: ' + error.message)
-      return
+    } else {
+      queryClient.invalidateQueries({ queryKey: ['api-keys'] })
     }
-    queryClient.invalidateQueries({ queryKey: ['api-keys'] })
+    setIsDeleting(false)
+    setKeyToDelete(null)
   }
 
-  const handleCreateKey = async () => {
-    const name = prompt('Enter a name for the new API key:')
-    if (!name) return
+  const handleCreateKey = async (name: string) => {
     setIsCreating(true)
     try {
       const { data, error } = await authClient.apiKey.create({ name })
       if (error) {
         setErrorMessage('Failed to create API key: ' + error.message)
+        setIsCreateModalOpen(false)
         return
       }
       if (data?.key) {
         setNewKeySecret(data.key)
       }
+      setIsCreateModalOpen(false)
       queryClient.invalidateQueries({ queryKey: ['api-keys'] })
     } catch (err) {
       setErrorMessage('Failed to create API key: ' + (err as Error).message)
+      setIsCreateModalOpen(false)
     } finally {
       setIsCreating(false)
     }
@@ -156,6 +330,21 @@ function APIKeys() {
       title="API Keys Management"
       user={session?.user || { name: 'Loading...', email: '' }}
     >
+      <CreateKeyModal
+        isOpen={isCreateModalOpen}
+        onClose={() => setIsCreateModalOpen(false)}
+        onCreate={handleCreateKey}
+        isCreating={isCreating}
+      />
+
+      <DeleteConfirmModal
+        isOpen={!!keyToDelete}
+        keyName={keyToDelete?.name ?? null}
+        onClose={() => setKeyToDelete(null)}
+        onConfirm={handleDeleteConfirm}
+        isDeleting={isDeleting}
+      />
+
       {newKeySecret && (
         <NewKeyModal
           keyValue={newKeySecret}
@@ -184,12 +373,12 @@ function APIKeys() {
             Manage your API keys for accessing the RuteAI API
           </p>
           <button
-            onClick={handleCreateKey}
+            onClick={() => setIsCreateModalOpen(true)}
             disabled={isCreating}
             className="flex items-center gap-2 px-4 py-2 bg-[var(--accent-gold)] hover:bg-[var(--accent-gold-hover)] !text-[#0A0A0A] font-medium rounded-lg transition-colors disabled:opacity-50"
           >
             <Plus size={18} />
-            {isCreating ? 'Creating...' : 'Create New Key'}
+            Create New Key
           </button>
         </div>
 
@@ -236,7 +425,7 @@ function APIKeys() {
                     </div>
 
                     <button
-                      onClick={() => handleDeleteKey(apiKey.id)}
+                      onClick={() => setKeyToDelete(apiKey)}
                       className="p-2 text-[var(--text-secondary)] hover:text-[var(--error)] hover:bg-[var(--bg-hover)] rounded-lg transition-colors"
                       title="Revoke"
                     >
@@ -255,15 +444,7 @@ function APIKeys() {
                           {'•'.repeat(24)}
                         </span>
                       </div>
-                      <div className="absolute right-2 top-1/2 -translate-y-1/2">
-                        <button
-                          onClick={() => copyStart(apiKey.id, displayValue)}
-                          className="p-2 text-[var(--text-secondary)] hover:text-[var(--accent-gold)] transition-colors"
-                          title="Copy prefix"
-                        >
-                          <Copy size={16} />
-                        </button>
-                      </div>
+
                     </div>
 
                     {copiedId === apiKey.id && (
