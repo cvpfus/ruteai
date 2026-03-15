@@ -8,7 +8,16 @@ import {
   CreditCard,
 } from 'lucide-react'
 
+import { authClient } from '../lib/auth-client'
+import { redirect } from '@tanstack/react-router'
+
 export const Route = createFileRoute('/dashboard')({
+  ssr: false,
+  beforeLoad: ({ context }) => {
+    if (!context.isAuthenticated) {
+      throw redirect({ to: '/sign-in' })
+    }
+  },
   component: Dashboard,
 })
 
@@ -87,14 +96,19 @@ const recentRequests = [
   },
 ]
 
-const mockUser = {
-  name: 'John Doe',
-  email: 'john@example.com',
-}
+ function Dashboard() {
+  const { data: session } = authClient.useSession()
 
-function Dashboard() {
   return (
-    <DashboardLayout title="Dashboard Overview" user={mockUser}>
+    <DashboardLayout
+      title="Dashboard Overview"
+      user={
+        session?.user || {
+          name: 'Loading...',
+          email: '',
+        }
+      }
+    >
       <div className="space-y-8">
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">

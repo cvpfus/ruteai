@@ -1,49 +1,52 @@
 import { useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 import { DashboardLayout } from '../components/DashboardLayout'
-import { Plus, Copy, Eye, EyeOff, Trash2, RefreshCw } from 'lucide-react'
+import { Plus, Copy, Eye, EyeOff, Trash2 } from 'lucide-react'
+
+import { useMutation, useQuery } from 'convex/react'
+import { api } from '../../convex/_generated/api'
+import { authClient } from '../lib/auth-client'
+import { redirect } from '@tanstack/react-router'
+import { convexQuery } from '@convex-dev/react-query'
+import { useSuspenseQuery } from '@tanstack/react-query'
 
 export const Route = createFileRoute('/api-keys')({
+  //   ssr: false,
+  beforeLoad: async ({ context }) => {
+    if (!context.isAuthenticated) {
+      throw redirect({ to: '/sign-in' })
+    }
+
+    // await Promise.all([
+    //   context.queryClient.ensureQueryData(convexQuery(api.auth.getCurrentUser)),
+    // ])
+  },
   component: APIKeys,
 })
 
-// Mock data
-const mockApiKeys = [
-  {
-    id: 'key_1',
-    name: 'Production API Key',
-    key: 'rute_sk_prod_1234567890abcdef',
-    createdAt: '2024-03-01',
-    lastUsed: '2 hours ago',
-    status: 'active',
-  },
-  {
-    id: 'key_2',
-    name: 'Development API Key',
-    key: 'rute_sk_dev_0987654321fedcba',
-    createdAt: '2024-03-10',
-    lastUsed: '5 minutes ago',
-    status: 'active',
-  },
-  {
-    id: 'key_3',
-    name: 'Testing API Key',
-    key: 'rute_sk_test_abcdef1234567890',
-    createdAt: '2024-03-12',
-    lastUsed: '3 days ago',
-    status: 'inactive',
-  },
-]
-
-const mockUser = {
-  name: 'John Doe',
-  email: 'john@example.com',
-}
-
 function APIKeys() {
-  const [apiKeys, setApiKeys] = useState(mockApiKeys)
+  const { data: session, isPending: isSessionPending } = authClient.useSession()
+  console.log('[APIKeys] Session state:', {
+    session: session ? 'logged in' : 'no session',
+    isSessionPending,
+  })
+
+//   const user = useSuspenseQuery(convexQuery(api.auth.getCurrentUser))
+
+//   console.log('[APIKeys] User:', user)
+
+  const keys = useQuery(api.apiKeys.listKeys)
+  console.log('[APIKeys] Keys:', keys)
+  console.log('[APIKeys] Keys query result:', {
+    keys: keys ? `found ${keys.length} keys` : 'undefined (loading)',
+  })
+
+  const createKey = useMutation(api.apiKeys.createKey)
+  const revokeKey = useMutation(api.apiKeys.revokeKey)
+
   const [showKey, setShowKey] = useState<Record<string, boolean>>({})
   const [copiedId, setCopiedId] = useState<string | null>(null)
+  const [isCreating, setIsCreating] = useState(false)
 
   const toggleKeyVisibility = (id: string) => {
     setShowKey((prev) => ({ ...prev, [id]: !prev[id] }))
@@ -55,17 +58,38 @@ function APIKeys() {
     setTimeout(() => setCopiedId(null), 2000)
   }
 
-  const deleteKey = (id: string) => {
-    setApiKeys((prev) => prev.filter((k) => k.id !== id))
+  const handleDeleteKey = async (id: string) => {
+    if (confirm('Are you sure you want to revoke this API key?')) {
+      await revokeKey({ keyId: id as any })
+    }
   }
 
-  const regenerateKey = (id: string) => {
-    // Mock regeneration
-    console.log('Regenerate key:', id)
+  const handleCreateKey = async () => {
+    const name = prompt('Enter a name for the new API key:')
+    if (!name) return
+    console.log('[handleCreateKey] Creating key with name:', name)
+    setIsCreating(true)
+    try {
+      const result = await createKey({ name })
+      console.log('[handleCreateKey] Key created successfully:', result)
+    } catch (err) {
+      console.error('[handleCreateKey] Failed to create API key:', err)
+      alert('Failed to create API key: ' + (err as Error).message)
+    } finally {
+      setIsCreating(false)
+    }
   }
 
   return (
-    <DashboardLayout title="API Keys Management" user={mockUser}>
+    <DashboardLayout
+      title="API Keys Management"
+      user={
+        session?.user || {
+          name: 'Loading...',
+          email: '',
+        }
+      }
+    >
       <div className="space-y-6">
         {/* Header */}
         <div className="flex items-center justify-between">
@@ -74,86 +98,96 @@ function APIKeys() {
               Manage your API keys for accessing the RuteAI API
             </p>
           </div>
-          <button className="flex items-center gap-2 px-4 py-2 bg-[var(--accent-gold)] hover:bg-[var(--accent-gold-hover)] text-[var(--bg-sidebar)] font-medium rounded-lg transition-colors">
+          <button
+            onClick={handleCreateKey}
+            disabled={isCreating}
+            className="flex items-center gap-2 px-4 py-2 bg-[var(--accent-gold)] hover:bg-[var(--accent-gold-hover)] text-[var(--bg-sidebar)] font-medium rounded-lg transition-colors disabled:opacity-50"
+          >
             <Plus size={18} />
-            Create New Key
+            {isCreating ? 'Creating...' : 'Create New Key'}
           </button>
         </div>
 
         {/* API Keys List */}
         <div className="space-y-4">
-          {apiKeys.map((apiKey) => (
-            <div key={apiKey.id} className="card rounded-xl p-6">
-              <div className="flex items-start justify-between mb-4">
-                <div>
-                  <div className="flex items-center gap-3">
-                    <h3 className="font-semibold text-[var(--text-primary)]">
-                      {apiKey.name}
-                    </h3>
-                    <span
-                      className={`badge ${apiKey.status === 'active' ? 'badge-success' : 'badge-neutral'}`}
-                    >
-                      {apiKey.status}
-                    </span>
-                  </div>
-                  <p className="text-sm text-[var(--text-tertiary)] mt-1">
-                    Created on {apiKey.createdAt} • Last used {apiKey.lastUsed}
-                  </p>
-                </div>
-
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={() => regenerateKey(apiKey.id)}
-                    className="p-2 text-[var(--text-secondary)] hover:text-[var(--accent-gold)] hover:bg-[var(--bg-hover)] rounded-lg transition-colors"
-                    title="Regenerate"
-                  >
-                    <RefreshCw size={18} />
-                  </button>
-                  <button
-                    onClick={() => deleteKey(apiKey.id)}
-                    className="p-2 text-[var(--text-secondary)] hover:text-[var(--error)] hover:bg-[var(--bg-hover)] rounded-lg transition-colors"
-                    title="Delete"
-                  >
-                    <Trash2 size={18} />
-                  </button>
-                </div>
-              </div>
-
-              {/* Key Display */}
-              <div className="flex items-center gap-3">
-                <div className="flex-1 relative">
-                  <input
-                    type={showKey[apiKey.id] ? 'text' : 'password'}
-                    value={apiKey.key}
-                    readOnly
-                    className="w-full h-12 px-4 pr-24 font-mono text-sm bg-[var(--bg-input)] border border-[var(--border-color)] rounded-lg"
-                  />
-                  <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1">
-                    <button
-                      onClick={() => toggleKeyVisibility(apiKey.id)}
-                      className="p-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
-                    >
-                      {showKey[apiKey.id] ? (
-                        <EyeOff size={16} />
-                      ) : (
-                        <Eye size={16} />
-                      )}
-                    </button>
-                    <button
-                      onClick={() => copyKey(apiKey.id, apiKey.key)}
-                      className="p-2 text-[var(--text-secondary)] hover:text-[var(--accent-gold)] transition-colors"
-                    >
-                      <Copy size={16} />
-                    </button>
-                  </div>
-                </div>
-
-                {copiedId === apiKey.id && (
-                  <span className="text-sm text-[var(--success)]">Copied!</span>
-                )}
-              </div>
+          {!keys ? (
+            <p>Loading API keys...</p>
+          ) : keys.length === 0 ? (
+            <div className="text-center p-8 bg-[var(--bg-input)] rounded-xl border border-dashed border-[var(--border-color)]">
+              <p className="text-[var(--text-secondary)]">
+                You do not have any API keys yet.
+              </p>
             </div>
-          ))}
+          ) : (
+            keys.map((apiKey) => (
+              <div key={apiKey._id} className="card rounded-xl p-6">
+                <div className="flex items-start justify-between mb-4">
+                  <div>
+                    <div className="flex items-center gap-3">
+                      <h3 className="font-semibold text-[var(--text-primary)]">
+                        {apiKey.name}
+                      </h3>
+                      <span
+                        className={`badge ${apiKey.enabled ? 'badge-success' : 'badge-neutral'}`}
+                      >
+                        {apiKey.enabled ? 'active' : 'inactive'}
+                      </span>
+                    </div>
+                    <p className="text-sm text-[var(--text-tertiary)] mt-1">
+                      Created on{' '}
+                      {new Date(apiKey.createdAt).toLocaleDateString()}
+                    </p>
+                  </div>
+
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => handleDeleteKey(apiKey._id)}
+                      className="p-2 text-[var(--text-secondary)] hover:text-[var(--error)] hover:bg-[var(--bg-hover)] rounded-lg transition-colors"
+                      title="Revoke"
+                    >
+                      <Trash2 size={18} />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Key Display */}
+                <div className="flex items-center gap-3">
+                  <div className="flex-1 relative">
+                    <input
+                      type={showKey[apiKey._id] ? 'text' : 'password'}
+                      value={apiKey.key}
+                      readOnly
+                      className="w-full h-12 px-4 pr-24 font-mono text-sm bg-[var(--bg-input)] border border-[var(--border-color)] rounded-lg"
+                    />
+                    <div className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center gap-1">
+                      <button
+                        onClick={() => toggleKeyVisibility(apiKey._id)}
+                        className="p-2 text-[var(--text-secondary)] hover:text-[var(--text-primary)] transition-colors"
+                      >
+                        {showKey[apiKey._id] ? (
+                          <EyeOff size={16} />
+                        ) : (
+                          <Eye size={16} />
+                        )}
+                      </button>
+                      <button
+                        onClick={() => copyKey(apiKey._id, apiKey.key)}
+                        className="p-2 text-[var(--text-secondary)] hover:text-[var(--accent-gold)] transition-colors"
+                      >
+                        <Copy size={16} />
+                      </button>
+                    </div>
+                  </div>
+
+                  {copiedId === apiKey._id && (
+                    <span className="text-sm text-[var(--success)]">
+                      Copied!
+                    </span>
+                  )}
+                </div>
+              </div>
+            ))
+          )}
         </div>
 
         {/* Info Card */}

@@ -1,8 +1,15 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { DashboardLayout } from '../components/DashboardLayout'
 import { ArrowUpRight, ArrowDownRight } from 'lucide-react'
+import { authClient } from '../lib/auth-client'
+import { redirect } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/usage')({
+  beforeLoad: ({ context }) => {
+    if (!context.isAuthenticated) {
+      throw redirect({ to: '/sign-in' })
+    }
+  },
   component: Usage,
 })
 
@@ -78,16 +85,20 @@ const recentRequests = [
   },
 ]
 
-const mockUser = {
-  name: 'John Doe',
-  email: 'john@example.com',
-}
-
 function Usage() {
+  const { data: session } = authClient.useSession()
   const maxValue = Math.max(...dailyRequests.map((d) => d.value))
 
   return (
-    <DashboardLayout title="Usage Analytics" user={mockUser}>
+    <DashboardLayout
+      title="API Usage"
+      user={
+        session?.user || {
+          name: 'Loading...',
+          email: '',
+        }
+      }
+    >
       <div className="space-y-8">
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
