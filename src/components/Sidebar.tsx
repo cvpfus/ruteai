@@ -9,6 +9,7 @@ import {
   LogOut,
   User,
 } from 'lucide-react'
+import { authClient } from '../lib/auth-client'
 
 interface SidebarProps {
   user?: {
@@ -91,7 +92,18 @@ export function Sidebar({ user }: SidebarProps) {
             <Settings size={20} />
             <span className="font-medium">Settings</span>
           </button>
-          <button className="nav-item w-full text-left text-[var(--error)]">
+          <button
+            onClick={() => {
+              void authClient.signOut({
+                fetchOptions: {
+                  onSuccess: () => {
+                    window.location.reload()
+                  },
+                },
+              })
+            }}
+            className="nav-item w-full text-left text-[var(--error)]"
+          >
             <LogOut size={20} />
             <span className="font-medium">Sign Out</span>
           </button>
