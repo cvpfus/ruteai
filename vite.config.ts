@@ -20,6 +20,14 @@ const config = defineConfig({
   ssr: {
     noExternal: ['@convex-dev/better-auth'],
   },
+  build: {
+    rollupOptions: {
+      external: ['node:stream', 'node:stream/web', 'node:async_hooks'],
+    },
+  },
+  optimizeDeps: {
+    exclude: ['@tanstack/router-core', '@tanstack/start-storage-context', '@tanstack/start-server-core'],
+  },
 })
 
 export default config
