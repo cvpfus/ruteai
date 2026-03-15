@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "skills": {
+    "better-auth-best-practices": {
+      "source": "better-auth/skills",
+      "sourceType": "github",
+      "computedHash": "9ab075b5061be2a5f299c10505667345cc1ec76e8de4120901cfd586643e776f"
+    },
+    "better-auth-security-best-practices": {
+      "source": "better-auth/skills",
+      "sourceType": "github",
+      "computedHash": "ed38caef4b297cc399d717258d6ea4e6ecb8894c453c83450064c7e7c6e5cc02"
+    },
+    "email-and-password-best-practices": {
+      "source": "better-auth/skills",
+      "sourceType": "github",
+      "computedHash": "7786d722fa682b3d6a99793e73a9d51b59becefa595676134a993020633e068f"
+    },
+    "vercel-react-best-practices": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "computedHash": "ff602214356ac15c65aa8702aff5a2aedaf958d66d301e3279f1dfeaf18c94e9"
+    }
+  }
+}

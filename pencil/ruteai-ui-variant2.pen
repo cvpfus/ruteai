@@ -1,0 +1,1133 @@
+{
+  "version": "2.8",
+  "children": [
+    {
+      "type": "frame",
+      "id": "acUWk",
+      "x": 0,
+      "y": 0,
+      "name": "Sign Up Page",
+      "width": 1440,
+      "height": 1024,
+      "fill": "$background-primary",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "Smj4C",
+          "name": "signupContainer",
+          "width": 400,
+          "layout": "vertical",
+          "gap": 32,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "l0b1Q",
+              "name": "signupTitle",
+              "fill": "$text-primary",
+              "content": "Create Account",
+              "fontFamily": "Inter",
+              "fontSize": 32,
+              "fontWeight": "600"
+            },
+            {
+              "type": "text",
+              "id": "EQ6vd",
+              "name": "signupSubtitle",
+              "fill": "$text-secondary",
+              "content": "Sign up to get started with RuteAI",
+              "fontFamily": "Inter",
+              "fontSize": 15
+            },
+            {
+              "type": "frame",
+              "id": "HQm2k",
+              "name": "signupForm",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 20,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "dVyfm",
+                  "name": "nameField",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "HI0qg",
+                      "name": "nameLabel",
+                      "fill": "$text-tertiary",
+                      "content": "Name",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "H6wzZ",
+                      "name": "nameInput",
+                      "width": "fill_container",
+                      "height": 48,
+                      "fill": "$background-surface",
+                      "stroke": {
+                        "thickness": 1,
+                        "fill": "$border-color"
+                      },
+                      "padding": [
+                        0,
+                        14
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "OX4GN",
+                          "name": "nameInputText",
+                          "fill": "$text-muted",
+                          "content": "Enter your name",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Sy5oT",
+                  "name": "emailField",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "izOr9",
+                      "name": "emailLabel",
+                      "fill": "$text-tertiary",
+                      "content": "Email",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "WY8O4",
+                      "name": "emailInput",
+                      "width": "fill_container",
+                      "height": 48,
+                      "fill": "$background-surface",
+                      "stroke": {
+                        "thickness": 1,
+                        "fill": "$border-color"
+                      },
+                      "padding": [
+                        0,
+                        14
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "qMr3q",
+                          "name": "emailInputText",
+                          "fill": "$text-muted",
+                          "content": "you@example.com",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "KWWHV",
+                  "name": "passwordField",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "2daVj",
+                      "name": "passwordLabel",
+                      "fill": "$text-tertiary",
+                      "content": "Password",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "wAMqI",
+                      "name": "passwordInput",
+                      "width": "fill_container",
+                      "height": 48,
+                      "fill": "$background-surface",
+                      "stroke": {
+                        "thickness": 1,
+                        "fill": "$border-color"
+                      },
+                      "padding": [
+                        0,
+                        14
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "uM5BW",
+                          "name": "passwordInputText",
+                          "fill": "$text-muted",
+                          "content": "••••••••",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "HfGc5",
+                  "name": "signupButton",
+                  "width": "fill_container",
+                  "height": 48,
+                  "fill": "$primary-color",
+                  "padding": [
+                    10,
+                    18
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "gYlp5",
+                      "name": "signupButtonText",
+                      "fill": "$background-primary",
+                      "content": "Create Account",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "cmYEE",
+              "name": "signinLink",
+              "gap": 4,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "jOWNa",
+                  "name": "signinLinkText",
+                  "fill": "$text-tertiary",
+                  "content": "Already have an account?",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 12
+                },
+                {
+                  "type": "text",
+                  "id": "GiRqb",
+                  "name": "signinLinkAction",
+                  "fill": "$primary-color",
+                  "content": "Sign in",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 12,
+                  "fontWeight": "500"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "uGbd0",
+      "x": 1500,
+      "y": 0,
+      "name": "Sign In Page",
+      "width": 1440,
+      "height": 1024,
+      "fill": "$background-primary",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "NUiPp",
+          "name": "signinContainer",
+          "width": 400,
+          "layout": "vertical",
+          "gap": 32,
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "PyMen",
+              "name": "signinTitle",
+              "fill": "$text-primary",
+              "content": "Welcome Back",
+              "fontFamily": "Inter",
+              "fontSize": 32,
+              "fontWeight": "600"
+            },
+            {
+              "type": "text",
+              "id": "TJ00C",
+              "name": "signinSubtitle",
+              "fill": "$text-secondary",
+              "content": "Sign in to your RuteAI account",
+              "fontFamily": "Inter",
+              "fontSize": 15
+            },
+            {
+              "type": "frame",
+              "id": "yKm8X",
+              "name": "signinForm",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 20,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "ECOvX",
+                  "name": "signinEmailField",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "pTKxC",
+                      "name": "signinEmailLabel",
+                      "fill": "$text-tertiary",
+                      "content": "Email",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "05o7u",
+                      "name": "signinEmailInput",
+                      "width": "fill_container",
+                      "height": 48,
+                      "fill": "$background-surface",
+                      "stroke": {
+                        "thickness": 1,
+                        "fill": "$border-color"
+                      },
+                      "padding": [
+                        0,
+                        14
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "1iuTC",
+                          "name": "signinEmailInputText",
+                          "fill": "$text-muted",
+                          "content": "you@example.com",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "kF8hu",
+                  "name": "signinPasswordField",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "gap": 8,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "wA0V0",
+                      "name": "signinPasswordLabel",
+                      "fill": "$text-tertiary",
+                      "content": "Password",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "kmtM8",
+                      "name": "signinPasswordInput",
+                      "width": "fill_container",
+                      "height": 48,
+                      "fill": "$background-surface",
+                      "stroke": {
+                        "thickness": 1,
+                        "fill": "$border-color"
+                      },
+                      "padding": [
+                        0,
+                        14
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "k1xMC",
+                          "name": "signinPasswordInputText",
+                          "fill": "$text-muted",
+                          "content": "••••••••",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "6r8Ne",
+                  "name": "signinButton",
+                  "width": "fill_container",
+                  "height": 48,
+                  "fill": "$primary-color",
+                  "padding": [
+                    10,
+                    18
+                  ],
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "1myFe",
+                      "name": "signinButtonText",
+                      "fill": "$background-primary",
+                      "content": "Sign In",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "ipXug",
+              "name": "signupLink",
+              "gap": 4,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "w2ZlE",
+                  "name": "signupLinkText",
+                  "fill": "$text-tertiary",
+                  "content": "Don't have an account?",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 12
+                },
+                {
+                  "type": "text",
+                  "id": "JXjz3",
+                  "name": "signupLinkAction",
+                  "fill": "$primary-color",
+                  "content": "Sign up",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 12,
+                  "fontWeight": "500"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "atGKq",
+      "x": 3000,
+      "y": 0,
+      "name": "Dashboard Overview",
+      "width": 1440,
+      "height": 1024,
+      "fill": "$background-primary",
+      "children": [
+        {
+          "type": "frame",
+          "id": "dqLLu",
+          "name": "sidebar",
+          "width": 240,
+          "height": "fill_container",
+          "fill": "$background-primary",
+          "stroke": {
+            "align": "center",
+            "thickness": 1,
+            "fill": "$border-color"
+          },
+          "layout": "vertical",
+          "gap": 40,
+          "padding": [
+            32,
+            24
+          ],
+          "children": [
+            {
+              "type": "text",
+              "id": "lP1a8",
+              "name": "logo",
+              "fill": "$text-primary",
+              "content": "RUTE AI",
+              "fontFamily": "Inter",
+              "fontSize": 15,
+              "fontWeight": "600",
+              "letterSpacing": 3
+            },
+            {
+              "type": "frame",
+              "id": "bOsul",
+              "name": "sidebarNav",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 2,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "PH70d",
+                  "name": "navDashboard",
+                  "width": "fill_container",
+                  "height": 40,
+                  "fill": "$background-surface",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 2,
+                    "fill": "$primary-color"
+                  },
+                  "gap": 12,
+                  "padding": [
+                    10,
+                    14
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "FClKs",
+                      "name": "navDashboardIcon",
+                      "width": 16,
+                      "height": 16,
+                      "iconFontName": "layout-dashboard",
+                      "iconFontFamily": "lucide",
+                      "fill": "$primary-color"
+                    },
+                    {
+                      "type": "text",
+                      "id": "N6tqC",
+                      "name": "navDashboardText",
+                      "fill": "$primary-color",
+                      "content": "Dashboard",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "fH8Ad",
+                  "name": "navApiKeys",
+                  "width": "fill_container",
+                  "height": 40,
+                  "gap": 12,
+                  "padding": [
+                    10,
+                    14
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "Kj05V",
+                      "name": "navApiKeysIcon",
+                      "width": 16,
+                      "height": 16,
+                      "iconFontName": "key",
+                      "iconFontFamily": "lucide",
+                      "fill": "$text-tertiary"
+                    },
+                    {
+                      "type": "text",
+                      "id": "0XVR5",
+                      "name": "navApiKeysText",
+                      "fill": "$text-tertiary",
+                      "content": "API Keys",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 13
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "8jt7L",
+                  "name": "navUsage",
+                  "width": "fill_container",
+                  "height": 40,
+                  "gap": 12,
+                  "padding": [
+                    10,
+                    14
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "orlRp",
+                      "name": "navUsageIcon",
+                      "width": 16,
+                      "height": 16,
+                      "iconFontName": "trending-up",
+                      "iconFontFamily": "lucide",
+                      "fill": "$text-tertiary"
+                    },
+                    {
+                      "type": "text",
+                      "id": "4ztdp",
+                      "name": "navUsageText",
+                      "fill": "$text-tertiary",
+                      "content": "Usage",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 13
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "GR0sE",
+                  "name": "navTransactions",
+                  "width": "fill_container",
+                  "height": 40,
+                  "gap": 12,
+                  "padding": [
+                    10,
+                    14
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "YkOvn",
+                      "name": "navTransactionsIcon",
+                      "width": 16,
+                      "height": 16,
+                      "iconFontName": "file-text",
+                      "iconFontFamily": "lucide",
+                      "fill": "$text-tertiary"
+                    },
+                    {
+                      "type": "text",
+                      "id": "KxHfB",
+                      "name": "navTransactionsText",
+                      "fill": "$text-tertiary",
+                      "content": "Transactions",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 13
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "T6Ha5",
+                  "name": "navSettings",
+                  "width": "fill_container",
+                  "height": 40,
+                  "gap": 12,
+                  "padding": [
+                    10,
+                    14
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "5Kv19",
+                      "name": "navSettingsIcon",
+                      "width": 16,
+                      "height": 16,
+                      "iconFontName": "settings",
+                      "iconFontFamily": "lucide",
+                      "fill": "$text-tertiary"
+                    },
+                    {
+                      "type": "text",
+                      "id": "rTGFH",
+                      "name": "navSettingsText",
+                      "fill": "$text-tertiary",
+                      "content": "Settings",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 13
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "EjluJ",
+          "name": "contentArea",
+          "width": "fill_container",
+          "height": "fill_container",
+          "fill": "$background-primary",
+          "layout": "vertical",
+          "gap": 40,
+          "padding": [
+            32,
+            48
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "x1mV3",
+              "name": "dashboardHeader",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "EMEuG",
+                  "name": "dashboardTitle",
+                  "fill": "$text-primary",
+                  "content": "Dashboard",
+                  "fontFamily": "Inter",
+                  "fontSize": 32,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "frame",
+                  "id": "wLHTe",
+                  "name": "userMenu",
+                  "gap": 12,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "9flqx",
+                      "name": "userAvatar",
+                      "width": 40,
+                      "height": 40,
+                      "fill": "$background-surface",
+                      "stroke": {
+                        "thickness": 1,
+                        "fill": "$border-color"
+                      },
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "m8PPD",
+                          "name": "userInitial",
+                          "fill": "$text-primary",
+                          "content": "JD",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "RETHM",
+              "name": "statsGrid",
+              "width": "fill_container",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "F0eUb",
+                  "name": "balanceCard",
+                  "width": "fill_container",
+                  "fill": "$background-surface",
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border-color"
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 24,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "U6haT",
+                      "name": "balanceLabel",
+                      "fill": "$text-tertiary",
+                      "content": "Credit Balance",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "plXW8",
+                      "name": "balanceValue",
+                      "fill": "$text-primary",
+                      "content": "Rp 1,250,000",
+                      "fontFamily": "Inter",
+                      "fontSize": 32,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "aXYuT",
+                      "name": "balanceAction",
+                      "fill": "$primary-color",
+                      "gap": 8,
+                      "padding": [
+                        10,
+                        18
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "JMJDW",
+                          "name": "balanceActionText",
+                          "fill": "$background-primary",
+                          "content": "Top Up",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 13,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "VgAxe",
+                  "name": "requestsCard",
+                  "width": "fill_container",
+                  "fill": "$background-surface",
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border-color"
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 24,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "1gCWa",
+                      "name": "requestsLabel",
+                      "fill": "$text-tertiary",
+                      "content": "API Requests (30d)",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "gy1nF",
+                      "name": "requestsValue",
+                      "fill": "$text-primary",
+                      "content": "12,450",
+                      "fontFamily": "Inter",
+                      "fontSize": 32,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "jrHrR",
+                      "name": "requestsChange",
+                      "gap": 4,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "u773D",
+                          "name": "requestsChangeIcon",
+                          "fill": "$primary-color",
+                          "content": "↑",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "n0CNB",
+                          "name": "requestsChangeText",
+                          "fill": "$primary-color",
+                          "content": "+12.5%",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "RIcId",
+                  "name": "tokensCard",
+                  "width": "fill_container",
+                  "fill": "$background-surface",
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border-color"
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 24,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "aVpWQ",
+                      "name": "tokensLabel",
+                      "fill": "$text-tertiary",
+                      "content": "Tokens Used (30d)",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "knJAT",
+                      "name": "tokensValue",
+                      "fill": "$text-primary",
+                      "content": "2.4M",
+                      "fontFamily": "Inter",
+                      "fontSize": 32,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "Qq6PO",
+                      "name": "tokensChange",
+                      "gap": 4,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "GDz5Z",
+                          "name": "tokensChangeIcon",
+                          "fill": "$primary-color",
+                          "content": "↑",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "ZiisT",
+                          "name": "tokensChangeText",
+                          "fill": "$primary-color",
+                          "content": "+8.2%",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "aS5os",
+                  "name": "spendCard",
+                  "width": "fill_container",
+                  "fill": "$background-surface",
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border-color"
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 24,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "jJ6TA",
+                      "name": "spendLabel",
+                      "fill": "$text-tertiary",
+                      "content": "Total Spend (30d)",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "text",
+                      "id": "NfXy7",
+                      "name": "spendValue",
+                      "fill": "$text-primary",
+                      "content": "Rp 450,000",
+                      "fontFamily": "Inter",
+                      "fontSize": 32,
+                      "fontWeight": "600"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "X3DaR",
+                      "name": "spendChange",
+                      "gap": 4,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "nrAxU",
+                          "name": "spendChangeIcon",
+                          "fill": "#FF4444",
+                          "content": "↓",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        },
+                        {
+                          "type": "text",
+                          "id": "Ey7LD",
+                          "name": "spendChangeText",
+                          "fill": "#FF4444",
+                          "content": "-5.1%",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 12,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "gYTiQ",
+              "name": "quickActions",
+              "width": "fill_container",
+              "gap": 16,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "StBBK",
+                  "name": "createKeyBtn",
+                  "fill": "$background-surface",
+                  "stroke": {
+                    "thickness": 1,
+                    "fill": "$border-color"
+                  },
+                  "gap": 8,
+                  "padding": [
+                    10,
+                    18
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "HNQ8j",
+                      "name": "createKeyIcon",
+                      "width": 14,
+                      "height": 14,
+                      "iconFontName": "plus",
+                      "iconFontFamily": "lucide",
+                      "fill": "$text-primary"
+                    },
+                    {
+                      "type": "text",
+                      "id": "wc5Uo",
+                      "name": "createKeyText",
+                      "fill": "$text-primary",
+                      "content": "Create API Key",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variables": {
+    "background-primary": {
+      "type": "color",
+      "value": "#000000"
+    },
+    "background-surface": {
+      "type": "color",
+      "value": "#111111"
+    },
+    "border-color": {
+      "type": "color",
+      "value": "#1A1A1A"
+    },
+    "primary-color": {
+      "type": "color",
+      "value": "#BFFF00"
+    },
+    "radius-md": {
+      "type": "number",
+      "value": 3
+    },
+    "radius-sm": {
+      "type": "number",
+      "value": 0
+    },
+    "spacing-2xl": {
+      "type": "number",
+      "value": 48
+    },
+    "spacing-lg": {
+      "type": "number",
+      "value": 24
+    },
+    "spacing-md": {
+      "type": "number",
+      "value": 16
+    },
+    "spacing-sm": {
+      "type": "number",
+      "value": 8
+    },
+    "spacing-xl": {
+      "type": "number",
+      "value": 32
+    },
+    "spacing-xs": {
+      "type": "number",
+      "value": 4
+    },
+    "text-muted": {
+      "type": "color",
+      "value": "#404040"
+    },
+    "text-primary": {
+      "type": "color",
+      "value": "#FFFFFF"
+    },
+    "text-secondary": {
+      "type": "color",
+      "value": "#999999"
+    },
+    "text-tertiary": {
+      "type": "color",
+      "value": "#6e6e6e"
+    }
+  }
+}
